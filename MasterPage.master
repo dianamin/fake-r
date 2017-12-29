@@ -29,8 +29,11 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="Default.aspx">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="Categories.aspx">Categories</a>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
-                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                    <asp:LoginView ID="LoginView2" runat="server">
+                        <LoggedInTemplate>
+                            <asp:LinkButton class="nav-item nav-link" ID="MyProfileLinkButton" runat="server" onclick="MyProfileLinkButton_Click">My Profile</asp:LinkButton>    
+                        </LoggedInTemplate>
+                    </asp:LoginView>
                 </div>
                 <div class="navbar-nav">
                         <asp:LoginView ID="LoginView1" runat="server">
@@ -55,7 +58,6 @@
         
             </asp:ContentPlaceHolder>
         </div>
-    </form>
     
     
     <!-- Optional JavaScript -->
@@ -63,6 +65,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    
+    
+    </form>
     
     
     </body>

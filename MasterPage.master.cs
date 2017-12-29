@@ -9,6 +9,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Attributes.Add("onClick", "test();");
+    }
 
+    protected void MyProfileLinkButton_Click(object sender, EventArgs e)
+    {
+        System.Diagnostics.Debug.WriteLine("YEY");
+        Response.Redirect("~/User.aspx?username=" + Profile.UserName);
     }
 }
