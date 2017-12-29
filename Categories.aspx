@@ -17,9 +17,7 @@
                     <span class="badge badge-primary badge-pill"> <%# Eval("PhotosCount") %> </span>
                 </div>
             </a>
-            
             <br />
-
         </ItemTemplate>
     </asp:Repeater>
 </asp:Content>

@@ -17,8 +17,8 @@
             <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# Eval("Url") %>' />
               <div class="card-body">     
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"> <a href='User.aspx/username=<%# Eval("UserName") %>'> <%# Eval("UserName") %> </a> </li>
-                  <li class="breadcrumb-item"> <a href='Album.aspx/album=<%# Eval("AlbumId") %>'> <%# Eval("AlbumName") %> </a> </li>
+                  <li class="breadcrumb-item"> <a href='User.aspx?username=<%# Eval("UserName") %>'> <%# Eval("UserName") %> </a> </li>
+                  <li class="breadcrumb-item"> <a href='Album.aspx?album=<%# Eval("AlbumId") %>'> <%# Eval("AlbumName") %> </a> </li>
                 </ol>
                 <h4 class="card-title"><%# Eval("Name") %> </h4>
                 <asp:Label ID="Label1" class="card-text" runat="server"
