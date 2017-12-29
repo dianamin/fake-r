@@ -14,24 +14,43 @@
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
         <ItemTemplate>
             <div class="card" style="width: 20rem; display: inline-block;">
-            <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# Eval("Url") %>' />
-              <div class="card-body">     
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"> <a href='User.aspx?username=<%# Eval("UserName") %>'> <%# Eval("UserName") %> </a> </li>
-                  <li class="breadcrumb-item"> <a href='Album.aspx?album=<%# Eval("AlbumId") %>'> <%# Eval("AlbumName") %> </a> </li>
-                </ol>
-                <h4 class="card-title"><%# Eval("Name") %> </h4>
-                <asp:Label ID="Label1" class="card-text" runat="server"
-                    Text='<%# Eval("Description") %>' />
-                <asp:Label ID="Label2" class="card-text" runat="server" 
-                    Text='<%# Eval("UploadDate") %>' />
-                <br />
-                <a href='Photo.aspx?photo=<%# Eval("PhotoId") %>' class="card-link">View Details</a>
-              </div>
+                <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# Eval("Url") %>' />
+                <div class="card-body">     
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> 
+                            <a href='User.aspx?username=<%# Eval("UserName") %>'>
+                                <i class="material-icons md-14">person</i>
+                                <%# Eval("UserName") %>
+                            </a> 
+                        </li>
+                        <li class="breadcrumb-item"> 
+                            <a href='Album.aspx?album=<%# Eval("AlbumId") %>'>
+                                <i class="material-icons md-14">book</i>
+                                <%# Eval("AlbumName") %>
+                            </a>
+                        </li>
+                    </ol>
+                    <h4 class="card-title">
+                        <i class="material-icons">loyalty</i>
+                        <%# Eval("Name") %>
+                    </h4>
+                    <div class="card-text" style="height: 22px; width: 100%; text-overflow: ellipsis; display: block; overflow: hidden; white-space: nowrap;">
+                        <%# Eval("Description") %>
+                    </div>
+                    <div>
+                        <i class="material-icons md-14">date_range</i>
+                        <asp:Label ID="Label2" class="card-text" runat="server" 
+                                   Text='<%# Eval("UploadDate") %>' />
+                    </div>
+                    <a href='Photo.aspx?photo=<%# Eval("PhotoId") %>' class="card-link">
+                        <i class="material-icons md-14">remove_red_eye</i>
+                        View Details
+                    </a>
+                </div>
             </div>
         </ItemTemplate>
         <LayoutTemplate>
-            <div ID="itemPlaceholderContainer" runat="server" style="">
+            <div ID="itemPlaceholderContainer" runat="server">
                 <span runat="server" id="itemPlaceholder" />
             </div>
             <div style="">

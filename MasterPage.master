@@ -11,12 +11,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <!-- Bootstrap CSS -->
+    <style>
+        .md-14 
+        {
+            font-size: 14px !important;
+        }
+    </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 <body>
     <form id="form1" runat="server">
@@ -43,7 +47,10 @@
                             <a class="nav-item nav-link" href="Login.aspx"> <i class="material-icons md-18">exit_to_app</i> Log in </a>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
-                            <div class="nav-item"> Hello, <asp:LoginName id="LogInName1" runat="server"/> </div>
+                            <i class="material-icons md-18">person</i>
+                            <div class="nav-item">
+                                <asp:LoginName id="LogInName1" runat="server"/>
+                            </div>
                             <a class="nav-item nav-link"> <asp:loginstatus id="LogInStatus1" runat="server"/> </a>
                         </LoggedInTemplate>
                     </asp:LoginView>
