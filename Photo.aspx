@@ -13,11 +13,15 @@
                 <br />
                 <asp:Label ID="Description" runat="server" Text="Label" Font-Size="Small"></asp:Label>
                 <hr />
-                <div class="form-group form-inline">
-                    <asp:TextBox ID="CommentMessage" class="form-control" runat="server"></asp:TextBox>
-                    <asp:Button ID="AddComment" runat="server" Text="Post" 
-                        class="btn btn-primary" onclick="AddComment_Click" style="margin-left: 3px;" />
-                </div>
+                <asp:LoginView ID="LoginView2" runat="server">
+                    <LoggedInTemplate>
+                        <div class="form-group form-inline">
+                            <asp:TextBox ID="CommentMessage" class="form-control" runat="server"></asp:TextBox>
+                            <asp:Button ID="AddComment" runat="server" Text="Post" 
+                                class="btn btn-primary" onclick="AddComment_Click" style="margin-left: 3px;" />
+                        </div>
+                    </LoggedInTemplate>
+                </asp:LoginView>
                 <asp:ListView ID="Comments" runat="server">
                     <ItemTemplate>
                         <div class="card">

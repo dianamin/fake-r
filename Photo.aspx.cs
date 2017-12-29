@@ -21,14 +21,16 @@ public partial class Photo : System.Web.UI.Page
 
     protected void AddComment_Click(object sender, EventArgs e)
     {
-        if (Request.Params["id"] != null)
+        if (Request.Params["photo"] != null)
         {
-            int photoId = int.Parse(Request.Params["id"]);
+            int photoId = int.Parse(Request.Params["photo"]);
+
+            TextBox CommentMessage = (TextBox)LoginView2.FindControl("CommentMessage");
             string commentMessage = CommentMessage.Text; 
 
             string insertCommentQuery = 
-                "INSERT INTO Comments (PhotoId,UserId,Message) " + 
-                "VALUES (@pPhotoId,'14bc71cc-2838-4807-b95b-eb6f2d7625a6',@pMessage)";
+                "INSERT INTO Comments (PhotoId,UserName,Message) " +
+                "VALUES (@pPhotoId,@pUserName,@pMessage)";
 
             SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
             try
@@ -36,9 +38,8 @@ public partial class Photo : System.Web.UI.Page
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(insertCommentQuery, cn);
                 cmd.Parameters.AddWithValue("pPhotoId", photoId);
+                cmd.Parameters.AddWithValue("pUserName", Profile.UserName);
                 cmd.Parameters.AddWithValue("pMessage", commentMessage);
-                System.Diagnostics.Debug.WriteLine(photoId);
-                System.Diagnostics.Debug.WriteLine(commentMessage);
                 cmd.ExecuteNonQuery();
                 cn.Close();
                 CommentMessage.Text = "";
@@ -84,9 +85,9 @@ public partial class Photo : System.Web.UI.Page
     private void fetchComments(int photoId)
     {
         string commentsQuery = 
-            "SELECT CommentId,u.UserName as UserName,Message,PostDate " + 
-            "FROM Comments c,aspnet_Users u " + 
-            "WHERE PhotoId=@pPhotoId AND u.UserId=c.UserId ORDER BY PostDate Desc";
+            "SELECT CommentId,UserName,Message,PostDate " + 
+            "FROM Comments " + 
+            "WHERE PhotoId=@pPhotoId ORDER BY PostDate Desc";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         try
         {
