@@ -22,7 +22,7 @@
                 <asp:Label ID="Label2" class="card-text" runat="server" 
                     Text='<%# Eval("UploadDate") %>' />
                 <br />
-                <a href='Photo.aspx?id=<%# Eval("PhotoId") %>' class="card-link">View Details</a>
+                <a href='Photo.aspx?photo=<%# Eval("PhotoId") %>' class="card-link">View Details</a>
               </div>
             </div>
         </ItemTemplate>

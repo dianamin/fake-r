@@ -11,8 +11,8 @@ public partial class Category : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.Params["id"] == null) return;
-        int id = int.Parse(Request.Params["id"]);
+        if (Request.Params["category"] == null) return;
+        int id = int.Parse(Request.Params["category"]);
         this.fetchCategoryDetails(id);
         this.fetchPhotos(id);
     }

@@ -11,8 +11,8 @@ public partial class Album : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.Params["id"] == null) return;
-        int id = int.Parse(Request.Params["id"]);
+        if (Request.Params["album"] == null) return;
+        int id = int.Parse(Request.Params["album"]);
         this.fetchAlbumDetails(id);
         this.fetchPhotos(id);
     }

@@ -11,9 +11,9 @@ public partial class Photo : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.Params["id"] != null)
+        if (Request.Params["photo"] != null)
         {
-            int photoId = int.Parse(Request.Params["id"]);
+            int photoId = int.Parse(Request.Params["photo"]);
             this.fetchPhoto(photoId);
             this.fetchComments(photoId);
         }
@@ -83,7 +83,6 @@ public partial class Photo : System.Web.UI.Page
 
     private void fetchComments(int photoId)
     {
-        int id = int.Parse(Request.Params["id"]);
         string commentsQuery = 
             "SELECT CommentId,u.UserName as UserName,Message,PostDate " + 
             "FROM Comments c,aspnet_Users u " + 
