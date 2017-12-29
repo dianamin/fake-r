@@ -35,8 +35,8 @@
                 <div class="navbar-nav">
                         <asp:LoginView ID="LoginView1" runat="server">
                             <AnonymousTemplate>
-                                <a class="nav-item nav-link" href="#"> <i class="material-icons md-18">person</i> Register</a>
-                                <a class="nav-item nav-link" href="Login.aspx"> <i class="material-icons md-18">exit_to_app</i>Log in</a>
+                                <a class="nav-item nav-link" href="Register.aspx"> <i class="material-icons md-18">person</i> Register </a>
+                                <a class="nav-item nav-link" href="Login.aspx"> <i class="material-icons md-18">exit_to_app</i> Log in </a>
                             </AnonymousTemplate>
                             <LoggedInTemplate>
                                 <div class="nav-item"> Hello, <asp:LoginName id="LogInName1" runat="server"/> </div>
