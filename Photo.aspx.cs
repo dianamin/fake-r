@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class Photo : System.Web.UI.Page
 {
@@ -12,31 +13,9 @@ public partial class Photo : System.Web.UI.Page
     {
         if (Request.Params["id"] != null)
         {
-            int id = int.Parse(Request.Params["id"]);
-            string cerereSQL = "SELECT Url,UserId,c.Name as Category,Description,UploadDate FROM Photos p JOIN Categories c ON (c.CategoryId = p.CategoryId) WHERE PhotoId=@pid";
-            SqlConnection cn = new SqlConnection(@"Data Source=LAPTOP-T2GBBU6T\SQLEXPRESS;Initial Catalog=Database;Integrated Security=True");
-            cn.Open();
-            try
-            {
-                SqlCommand cmd = new SqlCommand(cerereSQL, cn);
-                cmd.Parameters.AddWithValue("pId", id);
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    Image.ImageUrl = reader["Url"].ToString();
-                    Category.Text = reader["Category"].ToString();
-                    Description.Text = reader["Description"].ToString();
-                }
-                cn.Close();
-            }
-            catch (Exception exCMD)
-            {
-                Console.WriteLine(exCMD.Message);
-            }
-            finally
-            {
-                this.updateComments();
-            }
+            int photoId = int.Parse(Request.Params["id"]);
+            this.fetchPhoto(photoId);
+            this.fetchComments(photoId);
         }
     }
 
@@ -47,15 +26,17 @@ public partial class Photo : System.Web.UI.Page
             int photoId = int.Parse(Request.Params["id"]);
             string commentMessage = CommentMessage.Text; 
 
-            string insertCommentQuery = "INSERT INTO Comments (PhotoId,UserId,Message) VALUES (@PhotoId,'14bc71cc-2838-4807-b95b-eb6f2d7625a6',@Message)";
+            string insertCommentQuery = 
+                "INSERT INTO Comments (PhotoId,UserId,Message) " + 
+                "VALUES (@pPhotoId,'14bc71cc-2838-4807-b95b-eb6f2d7625a6',@pMessage)";
 
-            SqlConnection cn = new SqlConnection(@"Data Source=LAPTOP-T2GBBU6T\SQLEXPRESS;Initial Catalog=Database;Integrated Security=True");
+            SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
             try
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(insertCommentQuery, cn);
-                cmd.Parameters.AddWithValue("PhotoId", photoId);
-                cmd.Parameters.AddWithValue("Message", commentMessage);
+                cmd.Parameters.AddWithValue("pPhotoId", photoId);
+                cmd.Parameters.AddWithValue("pMessage", commentMessage);
                 System.Diagnostics.Debug.WriteLine(photoId);
                 System.Diagnostics.Debug.WriteLine(commentMessage);
                 cmd.ExecuteNonQuery();
@@ -68,33 +49,59 @@ public partial class Photo : System.Web.UI.Page
             }
             finally
             {
-                this.updateComments();
+                this.fetchComments(photoId);
             }
         }
     }
 
-    private void updateComments()
+    private void fetchPhoto(int photoId)
     {
-        if (Request.Params["id"] != null)
+        string cerereSQL = 
+            "SELECT Url,UserId,c.Name as Category,Description,UploadDate " + 
+            "FROM Photos p JOIN Categories c ON (c.CategoryId = p.CategoryId) " + 
+            "WHERE PhotoId=@pPhotoId";
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        cn.Open();
+        try
         {
-            int id = int.Parse(Request.Params["id"]);
-            string commentsQuery = "SELECT CommentId,u.UserName as UserName,Message,PostDate FROM Comments c,aspnet_Users u " + 
-                                    "WHERE PhotoId=@pid AND u.UserId=c.UserId ORDER BY PostDate Desc";
-            SqlConnection cn = new SqlConnection(@"Data Source=LAPTOP-T2GBBU6T\SQLEXPRESS;Initial Catalog=Database;Integrated Security=True");
-            try
+            SqlCommand cmd = new SqlCommand(cerereSQL, cn);
+            cmd.Parameters.AddWithValue("pPhotoId", photoId);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand(commentsQuery, cn);
-                cmd.Parameters.AddWithValue("pid", id);
-                SqlDataReader reader = cmd.ExecuteReader();
-                Comments.DataSource = reader;
-                Comments.DataBind();
-                cn.Close();
+                Image.ImageUrl = reader["Url"].ToString();
+                Category.Text = reader["Category"].ToString();
+                Description.Text = reader["Description"].ToString();
             }
-            catch (Exception exCMD)
-            {
-                Console.WriteLine(exCMD.Message);
-            }
+            cn.Close();
+        }
+        catch (Exception exCMD)
+        {
+            Console.WriteLine(exCMD.Message);
+        }
+    }
+
+    private void fetchComments(int photoId)
+    {
+        int id = int.Parse(Request.Params["id"]);
+        string commentsQuery = 
+            "SELECT CommentId,u.UserName as UserName,Message,PostDate " + 
+            "FROM Comments c,aspnet_Users u " + 
+            "WHERE PhotoId=@pPhotoId AND u.UserId=c.UserId ORDER BY PostDate Desc";
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        try
+        {
+            cn.Open();
+            SqlCommand cmd = new SqlCommand(commentsQuery, cn);
+            cmd.Parameters.AddWithValue("pPhotoId", photoId);
+            SqlDataReader reader = cmd.ExecuteReader();
+            Comments.DataSource = reader;
+            Comments.DataBind();
+            cn.Close();
+        }
+        catch (Exception exCMD)
+        {
+            Console.WriteLine(exCMD.Message);
         }
     }
 }

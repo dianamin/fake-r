@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class Category : System.Web.UI.Page
 {
@@ -19,7 +20,7 @@ public partial class Category : System.Web.UI.Page
     private void fetchCategoryDetails(int CategoryId)
     {
         string cerereSQL = "SELECT Name FROM Categories WHERE CategoryId=@pCategoryId";
-        SqlConnection cn = new SqlConnection(@"Data Source=LAPTOP-T2GBBU6T\SQLEXPRESS;Initial Catalog=Database;Integrated Security=True");
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         cn.Open();
         try
         {
@@ -44,7 +45,7 @@ public partial class Category : System.Web.UI.Page
             "SELECT PhotoId,Url,Description,UploadDate FROM [Photos] " +
             "WHERE CategoryId=@pCategoryId " +
             "ORDER BY UploadDate DESC";
-        SqlConnection cn = new SqlConnection(@"Data Source=LAPTOP-T2GBBU6T\SQLEXPRESS;Initial Catalog=Database;Integrated Security=True");
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         try
         {
             cn.Open();
