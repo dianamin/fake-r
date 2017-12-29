@@ -19,12 +19,14 @@ public partial class Category : System.Web.UI.Page
 
     private void fetchCategoryDetails(int CategoryId)
     {
-        string cerereSQL = "SELECT Name FROM Categories WHERE CategoryId=@pCategoryId";
+        string categoryQuery =
+            "SELECT Name FROM Categories " + 
+            "WHERE CategoryId=@pCategoryId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         cn.Open();
         try
         {
-            SqlCommand cmd = new SqlCommand(cerereSQL, cn);
+            SqlCommand cmd = new SqlCommand(categoryQuery, cn);
             cmd.Parameters.AddWithValue("pCategoryId", CategoryId);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())

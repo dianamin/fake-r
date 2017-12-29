@@ -19,12 +19,15 @@ public partial class Album : System.Web.UI.Page
 
     private void fetchAlbumDetails(int AlbumId)
     {
-        string cerereSQL = "SELECT u.UserName,Name,Description,CreatedDate FROM Albums a,aspnet_Users u WHERE a.AlbumId=@pAlbumId AND a.UserId=u.UserId";
+        string albumQuery = 
+            "SELECT u.UserName,Name,Description,CreatedDate " +
+            "FROM Albums a,aspnet_Users u " +
+            "WHERE a.AlbumId=@pAlbumId AND a.UserId=u.UserId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         cn.Open();
         try
         {
-            SqlCommand cmd = new SqlCommand(cerereSQL, cn);
+            SqlCommand cmd = new SqlCommand(albumQuery, cn);
             cmd.Parameters.AddWithValue("pAlbumId", AlbumId);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())

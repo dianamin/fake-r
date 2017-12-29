@@ -56,7 +56,7 @@ public partial class Photo : System.Web.UI.Page
 
     private void fetchPhoto(int photoId)
     {
-        string cerereSQL = 
+        string photoQuery = 
             "SELECT Url,UserId,c.Name as Category,Description,UploadDate " + 
             "FROM Photos p JOIN Categories c ON (c.CategoryId = p.CategoryId) " + 
             "WHERE PhotoId=@pPhotoId";
@@ -64,7 +64,7 @@ public partial class Photo : System.Web.UI.Page
         cn.Open();
         try
         {
-            SqlCommand cmd = new SqlCommand(cerereSQL, cn);
+            SqlCommand cmd = new SqlCommand(photoQuery, cn);
             cmd.Parameters.AddWithValue("pPhotoId", photoId);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
