@@ -19,34 +19,44 @@
       rel="stylesheet">
   </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">FakeR</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="Default.aspx">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="Categories.aspx">Categories</a>
-                <a class="nav-item nav-link" href="#">Pricing</a>
-                <a class="nav-item nav-link disabled" href="#">Disabled</a>
-            </div>
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#"> <i class="material-icons md-18">person</i> Sign Up</a>
-                <a class="nav-item nav-link" href="#"> <i class="material-icons md-18">exit_to_app</i>Log in</a>
-            </div>
-        </div>
-    </nav>
-
     <form id="form1" runat="server">
-    <div style="width: 98%; margin: 10px auto;">
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">FakeR</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="Default.aspx">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="Categories.aspx">Categories</a>
+                    <a class="nav-item nav-link" href="#">Pricing</a>
+                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                </div>
+                <div class="navbar-nav">
+                        <asp:LoginView ID="LoginView1" runat="server">
+                            <AnonymousTemplate>
+                                <a class="nav-item nav-link" href="#"> <i class="material-icons md-18">person</i> Register</a>
+                                <a class="nav-item nav-link" href="Login.aspx"> <i class="material-icons md-18">exit_to_app</i>Log in</a>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <div class="nav-item"> Hello, <asp:LoginName id="LogInName1" runat="server"/> </div>
+                                <a class="nav-item nav-link"> <asp:loginstatus id="LogInStatus1" runat="server"/> </a>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                </div>
+            </div>
+        </nav>
+
+        <div style="width: 98%; margin: 10px auto;">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
-            <asp:EntityDataSource ID="EntityDataSource1" runat="server">
-            </asp:EntityDataSource>
+                <asp:EntityDataSource ID="EntityDataSource1" runat="server">
+                </asp:EntityDataSource>
         
-        </asp:ContentPlaceHolder>
-    </div>
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -54,7 +64,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     
-    </form>
     
     </body>
 </html>
