@@ -6,15 +6,17 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" 
         SelectCommand="SELECT c.CategoryId, c.Name, COUNT(p.PhotoId)  as PhotosCount
-FROM [Categories] c LEFT JOIN [Photos] p ON (p.CategoryId = c.CategoryId)
-GROUP BY c.CategoryId, c.Name
-ORDER BY PhotosCount DESC"></asp:SqlDataSource>
+        FROM [Categories] c LEFT JOIN [Photos] p ON (p.CategoryId = c.CategoryId)
+        GROUP BY c.CategoryId, c.Name
+        ORDER BY PhotosCount DESC"></asp:SqlDataSource>
     <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
         <ItemTemplate>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <%# Eval("Name") %>
-                <span class="badge badge-primary badge-pill"> <%# Eval("PhotosCount") %> </span>
-            </div>
+            <a href='Category.aspx?id=<%# Eval("CategoryId") %>'>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <%# Eval("Name") %>
+                    <span class="badge badge-primary badge-pill"> <%# Eval("PhotosCount") %> </span>
+                </div>
+            </a>
             
             <br />
 
