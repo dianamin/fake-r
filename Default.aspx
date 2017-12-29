@@ -6,9 +6,9 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" 
         SelectCommand="
-        SELECT TOP 100 PhotoId,Url,UploadDate,a.Name as AlbumName, a.AlbumId as AlbumId,p.Description as Description,c.Name,u.userName as UserName
-        FROM [Photos] p, [Categories] c, [Albums] a, [aspnet_Users] u
-        WHERE p.CategoryId = c.CategoryId AND a.AlbumId = p.AlbumId AND u.UserId = p.UserId
+        SELECT TOP 100 PhotoId,Url,UploadDate,a.Name as AlbumName, a.AlbumId as AlbumId,p.Description as Description,c.Name,a.UserName as UserName
+        FROM [Photos] p, [Categories] c, [Albums] a
+        WHERE p.CategoryId = c.CategoryId AND a.AlbumId = p.AlbumId
         ORDER BY p.UploadDate DESC">
     </asp:SqlDataSource>
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">

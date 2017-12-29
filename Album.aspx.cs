@@ -20,9 +20,9 @@ public partial class Album : System.Web.UI.Page
     private void fetchAlbumDetails(int AlbumId)
     {
         string albumQuery = 
-            "SELECT u.UserName,Name,Description,CreatedDate " +
-            "FROM Albums a,aspnet_Users u " +
-            "WHERE a.AlbumId=@pAlbumId AND a.UserId=u.UserId";
+            "SELECT UserName,Name,Description,CreatedDate " +
+            "FROM Albums " +
+            "WHERE AlbumId=@pAlbumId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         cn.Open();
         try

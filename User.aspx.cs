@@ -21,7 +21,8 @@ public partial class User : System.Web.UI.Page
         string albumsQuery =
             "SELECT a.AlbumId,a.Name,a.Description,COUNT(PhotoId) as PhotosCount " +
             "FROM Albums a LEFT JOIN Photos p ON (a.AlbumId = p.AlbumId) " +
-            "GROUP BY a.AlbumId,a.Name,a.Description";
+            "WHERE a.UserName=@pUserName " +
+            "GROUP BY a.AlbumId,a.Name,a.Description"; 
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         try
         {

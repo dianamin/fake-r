@@ -58,7 +58,7 @@ public partial class Photo : System.Web.UI.Page
     private void fetchPhoto(int photoId)
     {
         string photoQuery = 
-            "SELECT Url,UserId,c.Name as Category,Description,UploadDate " + 
+            "SELECT Url,UserName,c.Name as Category,Description,UploadDate " + 
             "FROM Photos p JOIN Categories c ON (c.CategoryId = p.CategoryId) " + 
             "WHERE PhotoId=@pPhotoId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
