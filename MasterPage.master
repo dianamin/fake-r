@@ -24,7 +24,7 @@
             width: auto !important;
         }
         
-        .card-text 
+        div.card-text 
         {
             display: block;
             height: 22px;
@@ -36,6 +36,7 @@
         
         .md-14 
         {
+            display: inline-block;
             font-size: 14px !important;
         }
     </style>
@@ -86,9 +87,6 @@
 
         <div style="width: 98%; margin: 10px auto;">
             <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-        
-                <asp:EntityDataSource ID="EntityDataSource1" runat="server">
-                </asp:EntityDataSource>
         
             </asp:ContentPlaceHolder>
         </div>
