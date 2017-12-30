@@ -46,7 +46,7 @@ public partial class Album : System.Web.UI.Page
     private void fetchPhotos(int AlbumId)
     {
         string photosQuery =
-            "SELECT PhotoId,Url,Description,UploadDate FROM [Photos] " +
+            "SELECT PhotoId,Name as PhotoName,Description,UploadDate FROM [Photos] " +
             "WHERE AlbumId=@pAlbumId " +
             "ORDER BY UploadDate DESC";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);

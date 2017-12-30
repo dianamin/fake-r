@@ -39,6 +39,11 @@
                         </LoggedInTemplate>
                     </asp:LoginView>
                     <a class="nav-item nav-link" href="Users.aspx">Users</a>
+                    <asp:LoginView ID="LoginView3" runat="server">
+                        <LoggedInTemplate>
+                            <a class="nav-item nav-link" href="AddPhoto.aspx">Add Photo</a>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
                 </div>
                 <div class="navbar-nav">
                     <asp:LoginView ID="LoginView1" runat="server">

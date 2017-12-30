@@ -3,13 +3,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:Label ID="UserName" runat="server" Text="Label"></asp:Label> /
-    <asp:Label ID="AlbumName" runat="server" Text="Label"></asp:Label>
+     
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <asp:Label ID="UserName" runat="server" Text="Label"></asp:Label> </li>
+        <li class="breadcrumb-item"> <asp:Label ID="AlbumName" runat="server" Text="Label" Font-Size="Large"></asp:Label> </li>
+    </ol>
+
     <br />
     <asp:ListView ID="Photos" runat="server">
         <ItemTemplate>
             <div class="card" style="width: 20rem; display: inline-block;">
-                <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# Eval("Url") %>' />
+                <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# "Images/" + Eval("PhotoName") %>' />
                 <div class="card-body">
                     <asp:Label ID="Label1" class="card-text" runat="server"
                         Text='<%# Eval("Description") %>' />

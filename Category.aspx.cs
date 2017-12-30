@@ -44,7 +44,7 @@ public partial class Category : System.Web.UI.Page
     private void fetchPhotos(int CategoryId)
     {
         string photosQuery =
-            "SELECT PhotoId,Url,Description,UploadDate FROM [Photos] " +
+            "SELECT PhotoId,Name as PhotoName,Description,UploadDate FROM [Photos] " +
             "WHERE CategoryId=@pCategoryId " +
             "ORDER BY UploadDate DESC";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);

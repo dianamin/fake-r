@@ -6,7 +6,7 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" 
         SelectCommand="
-        SELECT TOP 100 PhotoId,Url,UploadDate,a.Name as AlbumName, a.AlbumId as AlbumId,p.Description as Description,c.Name,a.UserName as UserName
+        SELECT TOP 100 PhotoId,p.Name as PhotoName,UploadDate,a.Name as AlbumName, a.AlbumId as AlbumId,p.Description as Description,c.Name,a.UserName as UserName
         FROM [Photos] p, [Categories] c, [Albums] a
         WHERE p.CategoryId = c.CategoryId AND a.AlbumId = p.AlbumId
         ORDER BY p.UploadDate DESC">
@@ -14,7 +14,7 @@
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
         <ItemTemplate>
             <div class="card" style="width: 20rem; display: inline-block;">
-                <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# Eval("Url") %>' />
+                <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# "Images/" + Eval("PhotoName") %>' />
                 <div class="card-body">     
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"> 
