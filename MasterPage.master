@@ -13,6 +13,12 @@
 
     <!-- Bootstrap CSS -->
     <style>
+        .card-img-top 
+        {
+            height: 20rem;
+            width: auto !important;
+        }
+        
         .md-14 
         {
             font-size: 14px !important;

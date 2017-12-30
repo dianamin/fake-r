@@ -13,8 +13,9 @@
     </asp:SqlDataSource>
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
         <ItemTemplate>
-            <div class="card" style="width: 20rem; display: inline-block;">
-                <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# "Images/" + Eval("PhotoName") %>' />
+            <div class="card" style="width: 20rem; display: inline-block; text-align: middle;">
+                <asp:Image ID="Image1" runat="server" class="card-img-top mx-auto d-block" 
+                           ImageUrl='<%# "Images/" + Eval("PhotoName") %>' ImageAlign="Middle" />
                 <div class="card-body">     
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"> 
