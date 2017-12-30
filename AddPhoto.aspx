@@ -20,6 +20,11 @@
                     DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="CategoryId">
                 </asp:DropDownList>
             </div>
+            <div class="form-group">
+                <asp:Label ID="Label1" runat="server" Text="Album"></asp:Label>
+                <asp:DropDownList ID="Album" runat="server" class="form-control" AutoPostBack="true">
+                </asp:DropDownList>
+            </div>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" 
                 SelectCommand="SELECT [CategoryId], [Name] FROM [Categories]">
