@@ -13,10 +13,25 @@
 
     <!-- Bootstrap CSS -->
     <style>
+        .card 
+        {
+            margin-bottom: 5px;
+        }
+
         .card-img-top 
         {
             height: 20rem;
             width: auto !important;
+        }
+        
+        .card-text 
+        {
+            display: block;
+            height: 22px;
+            overflow: hidden; 
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
         }
         
         .md-14 

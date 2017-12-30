@@ -13,7 +13,7 @@
     </asp:SqlDataSource>
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
         <ItemTemplate>
-            <div class="card" style="width: 20rem; display: inline-block; text-align: middle;">
+            <div class="card" style="width: 20rem; display: inline-block;">
                 <asp:Image ID="Image1" runat="server" class="card-img-top mx-auto d-block" 
                            ImageUrl='<%# "Images/" + Eval("PhotoName") %>' ImageAlign="Middle" />
                 <div class="card-body">     
@@ -35,7 +35,7 @@
                         <i class="material-icons">loyalty</i>
                         <%# Eval("Name") %>
                     </h4>
-                    <div class="card-text" style="height: 22px; width: 100%; text-overflow: ellipsis; display: block; overflow: hidden; white-space: nowrap;">
+                    <div class="card-text">
                         <%# Eval("Description") %>
                     </div>
                     <div>

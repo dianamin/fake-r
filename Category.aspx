@@ -8,7 +8,8 @@
     <asp:ListView ID="Photos" runat="server">
         <ItemTemplate>
             <div class="card" style="width: 20rem; display: inline-block;">
-                <asp:Image ID="Image1" runat="server" class="card-img-top" ImageUrl='<%# "Images/" + Eval("PhotoName") %>' />
+                <asp:Image ID="Image1" runat="server" class="card-img-top mx-auto d-block"
+                           ImageUrl='<%# "Images/" + Eval("PhotoName") %>' />
                 <div class="card-body">
                     <asp:Label ID="Label1" class="card-text" runat="server"
                         Text='<%# Eval("Description") %>' />
