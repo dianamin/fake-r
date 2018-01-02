@@ -11,6 +11,7 @@ public partial class Photo : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Page.IsPostBack) return;
         if (Request.Params["photo"] != null)
         {
             int photoId = int.Parse(Request.Params["photo"]);
@@ -85,7 +86,7 @@ public partial class Photo : System.Web.UI.Page
     private void fetchComments(int photoId)
     {
         string commentsQuery = 
-            "SELECT CommentId,UserName,Message,PostDate " + 
+            "SELECT CommentId, UserName, Message, PostDate " + 
             "FROM Comments " + 
             "WHERE PhotoId=@pPhotoId ORDER BY PostDate Desc";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
@@ -121,6 +122,30 @@ public partial class Photo : System.Web.UI.Page
             cmd.ExecuteNonQuery();
             cn.Close();
             Response.Redirect("~/");
+        }
+        catch (Exception exCMD)
+        {
+            Console.WriteLine(exCMD.Message);
+        }
+    }
+
+    protected void DeleteComment_Click(object sender, EventArgs e)
+    {
+        if (Request.Params["photo"] == null) return;
+        int photoId = int.Parse(Request.Params["photo"]);
+        int commentId = int.Parse(((Button)sender).CommandArgument.ToString());
+        string deleteCommentsQuery =
+            "DELETE FROM Comments " +
+            "WHERE CommentId = @pCommentId";
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        try
+        {
+            cn.Open();
+            SqlCommand cmd = new SqlCommand(deleteCommentsQuery, cn);
+            cmd.Parameters.AddWithValue("pCommentId", commentId);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+            this.fetchComments(photoId);
         }
         catch (Exception exCMD)
         {

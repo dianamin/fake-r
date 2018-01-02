@@ -31,6 +31,9 @@
                     <ItemTemplate>
                         <div class="card">
                             <div class="card-body">
+                                <asp:Button ID="DeleteComment" runat="server" Text="Delete" 
+                                    class="btn btn-danger" style="float: right;" onclick="DeleteComment_Click" 
+                                    CommandArgument='<%# Eval("CommentId") %>' />
                                 <h6 class="card-title"> 
                                     <i class="material-icons md-14">person</i>
                                     <%# Eval("UserName") %>
