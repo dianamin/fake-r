@@ -104,4 +104,27 @@ public partial class Photo : System.Web.UI.Page
             Console.WriteLine(exCMD.Message);
         }
     }
+
+    protected void DeletePhoto_Click(object sender, EventArgs e)
+    {
+        if (Request.Params["photo"] == null) return;
+        int photoId = int.Parse(Request.Params["photo"]);
+        string deletePhotoQuery =
+            "DELETE FROM Photos " +
+            "WHERE PhotoId = @pPhotoId";
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        try
+        {
+            cn.Open();
+            SqlCommand cmd = new SqlCommand(deletePhotoQuery, cn);
+            cmd.Parameters.AddWithValue("pPhotoId", photoId);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+            Response.Redirect("~/");
+        }
+        catch (Exception exCMD)
+        {
+            Console.WriteLine(exCMD.Message);
+        }
+    }
 }
