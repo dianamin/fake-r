@@ -85,7 +85,7 @@
             </div>
         </nav>
 
-        <div style="width: 98%; margin: 10px auto;">
+        <div class="container-fluid center">
             <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
             </asp:ContentPlaceHolder>

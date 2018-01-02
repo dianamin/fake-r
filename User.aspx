@@ -8,11 +8,13 @@
     <asp:Repeater ID="Albums" runat="server">
         <ItemTemplate>
             <div class="card" style="width: 10rem; display: inline-block;">
-                <a href='Album.aspx?album=<%# Eval("AlbumId") %>'>
-                    <h6 class="card-title"> <%# Eval("Name") %> </h6>
-                </a>
-                <div class="card-body"> 
-                    <%# Eval("Description") %> 
+                <div class="card-body text-center">
+                    <a href='Album.aspx?album=<%# Eval("AlbumId") %>'>
+                        <i class="material-icons md-14"> book </i>
+                        <%# Eval("Name") %>
+                    </a>
+                    <br />
+                    <p> <%# Eval("Description") %> </p>
                     <span class="badge badge-primary badge-pill"> <%# Eval("PhotosCount") %> </span>
                 </div>
             </div>

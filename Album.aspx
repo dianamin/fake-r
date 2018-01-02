@@ -15,13 +15,31 @@
             <div class="card" style="width: 20rem; display: inline-block;">
                 <asp:Image ID="Image1" runat="server" class="card-img-top mx-auto d-block"
                            ImageUrl='<%# "Images/" + Eval("PhotoName") %>' />
-                <div class="card-body">
-                    <asp:Label ID="Label1" class="card-text" runat="server"
-                        Text='<%# Eval("Description") %>' />
-                    <asp:Label ID="Label2" class="card-text" runat="server" 
-                        Text='<%# Eval("UploadDate") %>' />
-                    <br />
-                    <a href='Photo.aspx?photo=<%# Eval("PhotoId") %>' class="card-link">View Details</a>
+                <div class="card-body">     
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"> 
+                            <a href='User.aspx?username=<%# Eval("UserName") %>'>
+                                <i class="material-icons md-14">person</i>
+                                <%# Eval("UserName") %>
+                            </a> 
+                        </li>
+                    </ol>
+                    <h4 class="card-title">
+                        <i class="material-icons">loyalty</i>
+                        <%# Eval("CategoryName") %>
+                    </h4>
+                    <div class="card-text">
+                        <%# Eval("Description") %>
+                    </div>
+                    <div>
+                        <i class="material-icons md-14">date_range</i>
+                        <asp:Label ID="Label2" class="card-text" runat="server" 
+                                   Text='<%# Eval("UploadDate") %>' />
+                    </div>
+                    <a href='Photo.aspx?photo=<%# Eval("PhotoId") %>' class="card-link">
+                        <i class="material-icons md-14">remove_red_eye</i>
+                        View Details
+                    </a>
                 </div>
             </div>
         </ItemTemplate>

@@ -11,13 +11,16 @@
         ORDER BY PhotosCount DESC"></asp:SqlDataSource>
     <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
         <ItemTemplate>
-            <a href='Category.aspx?category=<%# Eval("CategoryId") %>'>
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <%# Eval("Name") %>
-                    <span class="badge badge-primary badge-pill"> <%# Eval("PhotosCount") %> </span>
+            <div class="card align-items-center" style="width: 200px; display: inline-block;">
+                <div class="card-body text-center">
+                    <a href='Category.aspx?category=<%# Eval("CategoryId") %>'>
+                        <i class="material-icons md-14">loyalty</i>
+                        <%# Eval("Name") %>
+                    </a>
+                    <br />
+                    <span class="badge badge-primary badge-pill"> <%# Eval("PhotosCount") %> photos </span>
                 </div>
-            </a>
-            <br />
+            </div>
         </ItemTemplate>
     </asp:Repeater>
 </asp:Content>

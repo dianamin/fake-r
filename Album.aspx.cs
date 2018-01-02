@@ -20,7 +20,7 @@ public partial class Album : System.Web.UI.Page
     private void fetchAlbumDetails(int AlbumId)
     {
         string albumQuery = 
-            "SELECT UserName,Name,Description,CreatedDate " +
+            "SELECT UserName, Name, Description, CreatedDate " +
             "FROM Albums " +
             "WHERE AlbumId=@pAlbumId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
@@ -46,8 +46,9 @@ public partial class Album : System.Web.UI.Page
     private void fetchPhotos(int AlbumId)
     {
         string photosQuery =
-            "SELECT PhotoId,Name as PhotoName,Description,UploadDate FROM [Photos] " +
-            "WHERE AlbumId=@pAlbumId " +
+            "SELECT PhotoId, p.Name as PhotoName, p.UserName, UploadDate, c.Name as CategoryName, p.Description as Description " +
+            "FROM Photos p JOIN Categories c ON (p.CategoryId = c.CategoryId) " +
+            "WHERE p.AlbumId = @pAlbumId " +
             "ORDER BY UploadDate DESC";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         try

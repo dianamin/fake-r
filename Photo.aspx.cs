@@ -57,9 +57,9 @@ public partial class Photo : System.Web.UI.Page
 
     private void fetchPhoto(int photoId)
     {
-        string photoQuery = 
-            "SELECT p.Name as PhotoName,UserName,c.Name as Category,Description,UploadDate " + 
-            "FROM Photos p JOIN Categories c ON (c.CategoryId = p.CategoryId) " + 
+        string photoQuery =
+            "SELECT p.Name as PhotoName, p.UserName as UserName, c.Name as Category, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description " +
+            "FROM Photos p JOIN Categories c ON (c.CategoryId = p.CategoryId) JOIN Albums a ON (a.AlbumId = p.AlbumId) " + 
             "WHERE PhotoId=@pPhotoId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         cn.Open();
@@ -70,7 +70,7 @@ public partial class Photo : System.Web.UI.Page
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Image.ImageUrl = "Images/" + reader["Url"].ToString();
+                Image.ImageUrl = "Images/" + reader["PhotoName"].ToString();
                 Category.Text = reader["Category"].ToString();
                 Description.Text = reader["Description"].ToString();
             }
