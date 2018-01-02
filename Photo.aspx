@@ -16,6 +16,10 @@
                 <asp:Label ID="Category" runat="server" Text="Label" Font-Size="Large"></asp:Label>
                 <br />
                 <asp:Label ID="Description" runat="server" Text="Label" Font-Size="Small"></asp:Label>
+                <div>
+                    <i class="material-icons md-14">date_range</i>
+                    <asp:Label ID="UploadDate" class="card-text" runat="server" />
+                </div>
                 <hr />
                 <asp:LoginView ID="LoginView2" runat="server">
                     <LoggedInTemplate>

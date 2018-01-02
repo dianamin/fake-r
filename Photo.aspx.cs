@@ -74,6 +74,7 @@ public partial class Photo : System.Web.UI.Page
                 Image.ImageUrl = "Images/" + reader["PhotoName"].ToString();
                 Category.Text = reader["Category"].ToString();
                 Description.Text = reader["Description"].ToString();
+                UploadDate.Text = reader["UploadDate"].ToString();
             }
             cn.Close();
         }
