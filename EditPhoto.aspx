@@ -19,34 +19,20 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <h3>Image Upload, Crop & Save using ASP.NET & Jquery</h3>  
-    <table>  
-        <tr>  
-            <td> Select Image File : </td>  
-        </tr>  
-        <tr>  
-            <td colspan="3">  
-                <asp:Label ID="lblMsg" runat="server" ForeColor="Red" /> </td>  
-        </tr>  
-    </table>  
-    <asp:Panel ID="panCrop" runat="server">  
-        <table width="50%">  
-            <tr>  
-                <td>  
-                    <asp:Image ID="imgUpload" runat="server" Width="100%" /> </td>  
-            </tr>  
-            <tr>  
-                <td>  
-                    <asp:Button ID="btnCrop" runat="server" Text="Crop & Save" OnClick="btnCrop_Click" /> </td>  
-            </tr>  
-            <tr>  
-                <td>  
-                    <asp:HiddenField ID="X" runat="server" />  
-                    <asp:HiddenField ID="Y" runat="server" />  
-                    <asp:HiddenField ID="W" runat="server" />  
-                    <asp:HiddenField ID="H" runat="server" /> </td>  
-            </tr>  
-        </table>  
-    </asp:Panel>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8" style="text-align: center;">
+                <asp:Image ID="imgUpload" class="rounded" runat="server" style="max-height: 80vh; max-width: 100%; margin: 2px auto;" />
+                <asp:HiddenField ID="X" runat="server" />  
+                <asp:HiddenField ID="Y" runat="server" />  
+                <asp:HiddenField ID="W" runat="server" />  
+                <asp:HiddenField ID="H" runat="server" />
+            </div>
+            <div class="col-sm-4 jumbotron" style="height: 80vh; overflow-y: scroll;">
+                <h2> Crop Photo </h2>  
+                <asp:Button ID="btnCrop" runat="server" Text="Save" OnClick="btnCrop_Click" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
 </asp:Content>
 

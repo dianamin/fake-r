@@ -14,6 +14,12 @@ public partial class EditPhoto : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack) return;
+
+        if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+        
         if (Request.Params["photo"] != null)
         {
             int photoId = int.Parse(Request.Params["photo"]);
@@ -36,6 +42,11 @@ public partial class EditPhoto : System.Web.UI.Page
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
+                if ((string)reader["UserName"] != Profile.UserName)
+                {
+                    Response.Redirect("~/Photo.aspx?photo=" + Request.Params["photo"]);
+                }
+
                 imgUpload.ImageUrl = "Images/" + reader["PhotoName"].ToString();
             }
             cn.Close();
