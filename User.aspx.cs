@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.Security;
 
 public partial class User : System.Web.UI.Page
 {
@@ -48,5 +49,12 @@ public partial class User : System.Web.UI.Page
         {
             Console.WriteLine(exCMD.Message);
         }
+    }
+
+    protected void DeleteUser_Click(object sender, EventArgs e)
+    {
+        string username = Request.Params["username"];
+        Membership.DeleteUser(username);
+        Response.Redirect("~/Users.aspx");
     }
 }

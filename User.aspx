@@ -12,6 +12,17 @@
         <p><asp:Label ID="JoinDate" runat="server"></asp:Label></p>
       </div>
     </div>
+    <asp:LoginView runat="server">
+        <RoleGroups>
+            <asp:RoleGroup Roles="Admin">
+                <ContentTemplate>
+                    <asp:Button ID="DeleteUser" runat="server" Text="Delete account" OnClick="DeleteUser_Click" class="btn btn-danger"/>
+                </ContentTemplate>
+            </asp:RoleGroup>
+        </RoleGroups>
+    </asp:LoginView>
+    <br />
+    <br />    
     <asp:Repeater ID="Albums" runat="server">
         <ItemTemplate>
             <div class="card" style="width: 10rem; display: inline-block;">
