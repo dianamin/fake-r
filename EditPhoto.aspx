@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server"> 
     <link href="CSS/jquery.Jcrop.css" rel="stylesheet" />  
-    <script src="JS/jquery.Jcrop.js"></script>  
+    <script src="JS/jquery.Jcrop.js" type="text/javascript"></script>  
     <script type="text/javascript">
         $(document).ready(function () {
             $('#<%=imgUpload.ClientID%>').Jcrop({
@@ -16,25 +16,20 @@
             $('#<%=W.ClientID%>').val(parseInt(c.w));
             $('#<%=H.ClientID%>').val(parseInt(c.h));
         }  
-    </script>   
-
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <h3>Image Upload, Crop & Save using ASP.NET & Jquery</h3>  
     <table>  
         <tr>  
             <td> Select Image File : </td>  
-            <td>  
-                <asp:FileUpload ID="FU1" runat="server" /> </td>  
-            <td>  
-                <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" /> </td>  
         </tr>  
         <tr>  
             <td colspan="3">  
                 <asp:Label ID="lblMsg" runat="server" ForeColor="Red" /> </td>  
         </tr>  
     </table>  
-    <asp:Panel ID="panCrop" runat="server" Visible="false">  
+    <asp:Panel ID="panCrop" runat="server">  
         <table width="50%">  
             <tr>  
                 <td>  
