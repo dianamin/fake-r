@@ -6,24 +6,22 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.IO;
 
 public partial class AddPhoto : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
         {
-            this.fetchUserAlbums();
+            Response.Redirect("~/Login.aspx");
         }
+        if (IsPostBack) return;
+        this.fetchUserAlbums();
     }
 
     protected void Upload_Click(object sender, EventArgs e)
     {
-        FileUpload Image = (FileUpload)AddPhotoForm.FindControl("Image");
-        TextBox Description = (TextBox)AddPhotoForm.FindControl("Description");
-        DropDownList Category = (DropDownList)AddPhotoForm.FindControl("Category");
-        DropDownList Album = (DropDownList)AddPhotoForm.FindControl("Album");
-
         String imageName = DateTime.Now.ToString("dd-MM-yyyy-hh-mm-") + Guid.NewGuid().ToString() + ".jpg";
         Image.PostedFile.SaveAs(Server.MapPath("~/Images/") + imageName);
         String description = Description.Text;
@@ -57,7 +55,6 @@ public partial class AddPhoto : System.Web.UI.Page
 
     private void fetchUserAlbums()
     {
-        DropDownList Album = (DropDownList)AddPhotoForm.FindControl("Album");
         if (Album == null) return;
         string albumsQuery =
             "SELECT AlbumId, Name " +
