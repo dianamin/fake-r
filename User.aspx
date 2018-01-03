@@ -6,11 +6,11 @@
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4"><asp:Label ID="UserName" runat="server" Text="Label"></asp:Label></h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        <hr class="my-4" />
+        <p><asp:Label ID="Name" runat="server"></asp:Label></p>
+        <p><asp:Label ID="Description" runat="server"></asp:Label></p>
+        <p><asp:Label ID="JoinDate" runat="server"></asp:Label></p>
       </div>
-      <hr class="my-4" />
-      <p><asp:Label ID="Name" runat="server"></asp:Label></p>
-      <p><asp:Label ID="JoinDate" runat="server"></asp:Label></p>
     </div>
     <asp:Repeater ID="Albums" runat="server">
         <ItemTemplate>

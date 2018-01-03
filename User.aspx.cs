@@ -22,6 +22,7 @@ public partial class User : System.Web.UI.Page
     {
         ProfileCommon userProfile = Profile.GetProfile(userName);
         Name.Text = userProfile.FirstName + " " + userProfile.LastName;
+        Description.Text = userProfile.Description;
         JoinDate.Text = userProfile.JoinDate.ToString();
     }
 

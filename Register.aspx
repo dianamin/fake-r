@@ -80,10 +80,9 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TBLastName" ErrorMessage="Numele este necesar!"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
-                        <asp:Label ID="Label3" runat="server" Text="Birthday"></asp:Label>
-                        <asp:TextBox ID="TBBirthday" runat="server" class="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" Display="Dynamic" runat="server" ControlToValidate="TBBirthday" ErrorMessage="Data nasterii este necesara!"></asp:RequiredFieldValidator>
-                        <asp:CompareValidator ID="CompareValidator1" runat="server" Display="Dynamic" ErrorMessage="Data trebuie specificata in formatul LL/ZZ/AAA" ControlToValidate="TBBirthday" Operator="DataTypeCheck" Type="Date"></asp:CompareValidator>
+                        <asp:Label ID="Label3" runat="server" Text="Description"></asp:Label>
+                        <asp:TextBox ID="TBDescription" runat="server" class="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TBDescription" ErrorMessage="Descrierea este necesara!"></asp:RequiredFieldValidator>
                     </div>
                 </div>
             </asp:WizardStep>

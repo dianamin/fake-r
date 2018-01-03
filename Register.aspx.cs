@@ -28,8 +28,8 @@ public partial class Register : System.Web.UI.Page
         t = CreateUserWizard1.FindControl("TBLastName") as TextBox;
         if (t != null) Profile.LastName = t.Text;
 
-        t = CreateUserWizard1.FindControl("TBBirthday") as TextBox;
-        if (t != null) Profile.Birthday = DateTime.Parse(t.Text);
+        t = CreateUserWizard1.FindControl("TBDescription") as TextBox;
+        if (t != null) Profile.Description = t.Text;
 
         Profile.JoinDate = DateTime.Now;
     }
