@@ -8,7 +8,7 @@
             <div class="col-sm-8" style="text-align: center;">
                 <asp:Image ID="Image" class="rounded" style="max-height: 80vh; max-width: 100%; margin: 2px auto;" runat="server" />
             </div>
-            <div class="col-sm-4 text-right" style="height: 80vh; overflow-y: scroll;">
+            <div class="col-sm-4 jumbotron" style="height: 80vh; overflow-y: scroll;">
                 <asp:Button ID="DeletePhoto" runat="server" Text="Delete" 
                     class="btn btn-danger" style="float: right;" onclick="DeletePhoto_Click" />
                 <br />
