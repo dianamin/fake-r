@@ -12,8 +12,17 @@ public partial class User : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Params["username"] == null) return;
-        this.UserName.Text = Request.Params["username"];
-        this.fetchAlbums(Request.Params["username"]);
+        String userName = Request.Params["username"];
+        this.UserName.Text = userName;
+        this.fetchProfie(userName);
+        this.fetchAlbums(userName);
+    }
+
+    private void fetchProfie(string userName)
+    {
+        ProfileCommon userProfile = Profile.GetProfile(userName);
+        Name.Text = userProfile.FirstName + " " + userProfile.LastName;
+        JoinDate.Text = userProfile.JoinDate.ToString();
     }
 
     private void fetchAlbums(string userName)
