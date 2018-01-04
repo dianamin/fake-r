@@ -54,17 +54,16 @@
 <body>
     <form id="form1" runat="server">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">FakeR</a>
+            <a class="navbar-brand" href="Default.aspx">FakeR</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="Default.aspx">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="Categories.aspx">Categories</a>
                     <asp:LoginView ID="LoginView2" runat="server">
                         <LoggedInTemplate>
-                            <asp:LinkButton class="nav-item nav-link" ID="MyProfileLinkButton" runat="server" onclick="MyProfileLinkButton_Click">My Profile</asp:LinkButton>    
+                            <asp:LinkButton class="nav-item nav-link" ID="MyProfileLinkButton" runat="server" onclick="MyProfileLinkButton_Click">My Account</asp:LinkButton>    
                         </LoggedInTemplate>
                     </asp:LoginView>
                     <a class="nav-item nav-link" href="Users.aspx">Users</a>

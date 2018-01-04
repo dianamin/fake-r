@@ -22,7 +22,8 @@
         </RoleGroups>
     </asp:LoginView>
     <br />
-    <br />    
+    <br />
+    <h2> Albums </h2>
     <asp:Repeater ID="Albums" runat="server">
         <ItemTemplate>
             <div class="card" style="width: 10rem; display: inline-block;">
