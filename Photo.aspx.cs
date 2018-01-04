@@ -83,7 +83,8 @@ public partial class Photo : System.Web.UI.Page
                 UploadDate.Text = reader["UploadDate"].ToString();
                 
                 this.seeEditButtons = false;
-                if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated) {
+                if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                {
                     if (Profile.UserName == reader["UserName"].ToString())
                         this.seeEditButtons = true;
                     if (Roles.GetRolesForUser().Contains("Administrator"))

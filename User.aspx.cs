@@ -10,10 +10,21 @@ using System.Web.Security;
 
 public partial class User : System.Web.UI.Page
 {
+    protected bool seeButtons;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Params["username"] == null) return;
         String userName = Request.Params["username"];
+
+        this.seeButtons = false;
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            if (Profile.UserName == userName)
+                this.seeButtons = true;
+        }
+        DataBind();
+
         this.UserName.Text = userName;
         this.fetchProfie(userName);
         this.fetchAlbums(userName);
@@ -56,5 +67,10 @@ public partial class User : System.Web.UI.Page
         string username = Request.Params["username"];
         Membership.DeleteUser(username);
         Response.Redirect("~/Users.aspx");
+    }
+
+    protected void AddAlbum_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/AddAlbum.aspx");
     }
 }
