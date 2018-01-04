@@ -8,7 +8,8 @@
         <li class="breadcrumb-item"> <asp:Label ID="UserName" runat="server" Text="Label"></asp:Label> </li>
         <li class="breadcrumb-item"> <asp:Label ID="AlbumName" runat="server" Text="Label" Font-Size="Large"></asp:Label> </li>
     </ol>
-
+    <asp:Button ID="DeleteAlbum" runat="server" Text="Delete" 
+        onclick="DeleteAlbum_Click" class="btn btn-danger" visible="<%# canDelete %>"/>
     <br />
     <asp:ListView ID="Photos" runat="server">
         <ItemTemplate>

@@ -6,9 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.Security;
 
 public partial class Album : System.Web.UI.Page
 {
+    protected bool canDelete;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Params["album"] == null) return;
@@ -34,6 +37,16 @@ public partial class Album : System.Web.UI.Page
             {
                 AlbumName.Text = reader["Name"].ToString();
                 UserName.Text = reader["UserName"].ToString();
+
+                this.canDelete = false;
+                if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    if (Profile.UserName == reader["UserName"].ToString())
+                        this.canDelete = true;
+                    if (Roles.GetRolesForUser().Contains("Administrator"))
+                        this.canDelete = true;
+                }
+                DataBind();
             }
             cn.Close();
         }
@@ -60,6 +73,29 @@ public partial class Album : System.Web.UI.Page
             Photos.DataSource = reader;
             Photos.DataBind();
             cn.Close();
+        }
+        catch (Exception exCMD)
+        {
+            Console.WriteLine(exCMD.Message);
+        }
+    }
+
+    protected void DeleteAlbum_Click(object sender, EventArgs e)
+    {
+        if (Request.Params["album"] == null) return;
+        int albumId = int.Parse(Request.Params["album"]);
+        string deletePhotoQuery =
+            "DELETE FROM Albums " +
+            "WHERE AlbumId = @pAlbumId";
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        try
+        {
+            cn.Open();
+            SqlCommand cmd = new SqlCommand(deletePhotoQuery, cn);
+            cmd.Parameters.AddWithValue("pAlbumId", albumId);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+            Response.Redirect("~/User.aspx?username=" + Profile.UserName);
         }
         catch (Exception exCMD)
         {
