@@ -42,7 +42,6 @@ public partial class AddPhoto : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pCategoryId", categoryId);
             cmd.Parameters.AddWithValue("pDescription", description);
             cmd.Parameters.AddWithValue("pAlbumId", albumId);
-            System.Diagnostics.Debug.WriteLine(albumId);
             cmd.ExecuteNonQuery();
             cn.Close();
             Response.Redirect("~/Default.aspx");
