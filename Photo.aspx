@@ -10,7 +10,7 @@
             </div>
             <div class="col-sm-4 jumbotron" style="height: 80vh; overflow-y: scroll;">
                 <asp:Button ID="DeletePhoto" runat="server" Text="Delete" 
-                    class="btn btn-danger" style="float: right;" onclick="DeletePhoto_Click" />
+                    class="btn btn-danger" style="float: right;" onclick="DeletePhoto_Click" visible="<%# seeEditButtons %>" />
                 <br />
                 <i class="material-icons md-18">loyalty</i>
                 <asp:Label ID="Category" runat="server" Text="Label" Font-Size="Large"></asp:Label>
@@ -37,7 +37,7 @@
                             <div class="card-body">
                                 <asp:Button ID="DeleteComment" runat="server" Text="Delete" 
                                     class="btn btn-danger" style="float: right;" onclick="DeleteComment_Click" 
-                                    CommandArgument='<%# Eval("CommentId") %>' />
+                                    CommandArgument='<%# Eval("CommentId") %>' visible="<%# seeEditButtons %>" />
                                 <h6 class="card-title"> 
                                     <i class="material-icons md-14">person</i>
                                     <%# Eval("UserName") %>

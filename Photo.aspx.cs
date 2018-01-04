@@ -6,9 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.IO;
+using System.Web.Security;
 
 public partial class Photo : System.Web.UI.Page
 {
+    string photoName;
+    protected bool seeEditButtons;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack) return;
@@ -72,9 +77,19 @@ public partial class Photo : System.Web.UI.Page
             while (reader.Read())
             {
                 Image.ImageUrl = "Images/" + reader["PhotoName"].ToString();
+                this.photoName = reader["PhotoName"].ToString();
                 Category.Text = reader["Category"].ToString();
                 Description.Text = reader["Description"].ToString();
                 UploadDate.Text = reader["UploadDate"].ToString();
+                
+                this.seeEditButtons = false;
+                if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated) {
+                    if (Profile.UserName == reader["UserName"].ToString())
+                        this.seeEditButtons = true;
+                    if (Roles.GetRolesForUser().Contains("Administrator"))
+                        this.seeEditButtons = true;
+                }
+                DataBind();
             }
             cn.Close();
         }
@@ -114,6 +129,9 @@ public partial class Photo : System.Web.UI.Page
         string deletePhotoQuery =
             "DELETE FROM Photos " +
             "WHERE PhotoId = @pPhotoId";
+
+        var photoPath = Server.MapPath("~/Images/" + photoName);
+ 
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         try
         {
@@ -122,6 +140,10 @@ public partial class Photo : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pPhotoId", photoId);
             cmd.ExecuteNonQuery();
             cn.Close();
+            if (File.Exists(photoPath))
+            {
+                File.Delete(photoPath);
+            }
             Response.Redirect("~/");
         }
         catch (Exception exCMD)
