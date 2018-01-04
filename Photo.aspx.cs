@@ -175,4 +175,11 @@ public partial class Photo : System.Web.UI.Page
             Console.WriteLine(exCMD.Message);
         }
     }
+
+    protected void CropPhoto_Click(object sender, EventArgs e)
+    {
+        if (Request.Params["photo"] == null) return;
+        String photoId = Request.Params["photo"];
+        Response.Redirect("~/EditPhoto.aspx?photo=" + photoId);
+    }
 }

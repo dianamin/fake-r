@@ -9,8 +9,12 @@
                 <asp:Image ID="Image" class="rounded" style="max-height: 80vh; max-width: 100%; margin: 2px auto;" runat="server" />
             </div>
             <div class="col-sm-4 jumbotron" style="height: 80vh; overflow-y: scroll;">
-                <asp:Button ID="DeletePhoto" runat="server" Text="Delete" 
-                    class="btn btn-danger" style="float: right;" onclick="DeletePhoto_Click" visible="<%# seeEditButtons %>" />
+                <asp:Panel class="btn-group" visible="<%# seeEditButtons %>" style="float: right;" runat="server" >
+                    <asp:Button ID="CropPhoto" runat="server" Text="Crop Photo" 
+                        class="btn btn-warning" onclick="CropPhoto_Click" />
+                    <asp:Button ID="DeletePhoto" runat="server" Text="Delete" 
+                        class="btn btn-danger" onclick="DeletePhoto_Click" />
+                </asp:Panel>
                 <br />
                 <i class="material-icons md-18">loyalty</i>
                 <asp:Label ID="Category" runat="server" Text="Label" Font-Size="Large"></asp:Label>
