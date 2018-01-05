@@ -22,38 +22,23 @@ public partial class EditPhotoDetails : System.Web.UI.Page
         if (Request.Params["photo"] == null)
             Response.Redirect("~/");
 
-        int photoId = int.Parse(Request.Params["photo"]);
+        String photoId = Uri.UnescapeDataString(Request.Params["photo"]);
         this.fetchUserAlbums();
         this.fetchPhoto(photoId);
     }
 
     private void fetchUserAlbums()
     {
-        if (Album == null) return;
-        string albumsQuery =
+        AlbumsSource.SelectCommand =
             "SELECT AlbumId, Name " +
             "FROM Albums " +
             "WHERE UserName=@pUserName";
-        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-        try
-        {
-            cn.Open();
-            SqlCommand cmd = new SqlCommand(albumsQuery, cn);
-            cmd.Parameters.AddWithValue("pUserName", Profile.UserName);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Album.DataSource = reader;
-            Album.DataValueField = "AlbumId";
-            Album.DataTextField = "Name";
-            Album.DataBind();
-            cn.Close();
-        }
-        catch (Exception exCMD)
-        {
-            Console.WriteLine(exCMD.Message);
-        }
+        AlbumsSource.SelectParameters.Clear();
+        AlbumsSource.SelectParameters.Add("pUserName", Profile.UserName);
+        Page.DataBind();
     }
 
-    private void fetchPhoto(int photoId)
+    private void fetchPhoto(String photoId)
     {
         string photoQuery =
             "SELECT Name as PhotoName, UserName, CategoryId, AlbumId, Description " +
@@ -82,7 +67,7 @@ public partial class EditPhotoDetails : System.Web.UI.Page
                         canEdit = true;
                 }
                 if (!canEdit)
-                    Response.Redirect("~/Photo.aspx?photo=" + Request.Params["photo"]);
+                    Response.Redirect("~/Photo.aspx?photo=" + Uri.UnescapeDataString(Request.Params["photo"]));
             }
             cn.Close();
         }
@@ -94,7 +79,7 @@ public partial class EditPhotoDetails : System.Web.UI.Page
 
     protected void Save_Click(object sender, EventArgs e)
     {
-        String description = Description.Text;
+        String description = Uri.UnescapeDataString(Description.Text);
         int categoryId = int.Parse(Category.SelectedValue);
         int albumId = int.Parse(Album.SelectedValue);
 
@@ -111,7 +96,7 @@ public partial class EditPhotoDetails : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pCategoryId", categoryId);
             cmd.Parameters.AddWithValue("pDescription", description);
             cmd.Parameters.AddWithValue("pAlbumId", albumId);
-            cmd.Parameters.AddWithValue("pPhotoId", int.Parse(Request.Params["photo"]));
+            cmd.Parameters.AddWithValue("pPhotoId", Uri.UnescapeDataString(Request.Params["photo"]));
             cmd.ExecuteNonQuery();
             cn.Close();
             Response.Redirect("~/Photo.aspx?photo=" + Request.Params["photo"]);
