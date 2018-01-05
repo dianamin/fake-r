@@ -31,11 +31,15 @@ public partial class Category : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(categoryQuery, cn);
             cmd.Parameters.AddWithValue("pCategoryId", CategoryId);
             SqlDataReader reader = cmd.ExecuteReader();
+            bool categoryFound = false;
             while (reader.Read())
             {
+                categoryFound = true;
                 CategoryName.Text = reader["Name"].ToString();
             }
             cn.Close();
+            if (!categoryFound)
+                Response.Redirect("~/Categories.aspx");
         }
         catch (Exception exCMD)
         {

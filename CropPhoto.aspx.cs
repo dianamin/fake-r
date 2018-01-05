@@ -42,8 +42,10 @@ public partial class CropPhoto : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pPhotoId", photoId);
             SqlDataReader reader = cmd.ExecuteReader();
             bool canEdit = false;
+            bool photoFound = false;
             while (reader.Read())
             {
+                photoFound = true;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
@@ -53,6 +55,8 @@ public partial class CropPhoto : System.Web.UI.Page
                 imgUpload.ImageUrl = "Images/" + reader["PhotoName"].ToString();
             }
             cn.Close();
+            if (!photoFound)
+                Response.Redirect("~/");
             if (!canEdit)
                 Response.Redirect("~/Photo.aspx?photo=" + Request.Params["photo"]);
         }

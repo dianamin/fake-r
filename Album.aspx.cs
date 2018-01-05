@@ -35,13 +35,15 @@ public partial class Album : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(albumQuery, cn);
             cmd.Parameters.AddWithValue("pAlbumId", AlbumId);
             SqlDataReader reader = cmd.ExecuteReader();
+            this.seeEditButtons = false;
+            bool albumFound = false;
             while (reader.Read())
             {
+                albumFound = true;
                 AlbumName.Text = reader["Name"].ToString();
                 UserName.Text = reader["UserName"].ToString();
                 Description.Text = reader["Description"].ToString();
 
-                this.seeEditButtons = false;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
@@ -52,6 +54,8 @@ public partial class Album : System.Web.UI.Page
                 DataBind();
             }
             cn.Close();
+            if (!albumFound)
+                Response.Redirect("~/");
         }
         catch (Exception exCMD)
         {

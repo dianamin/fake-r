@@ -52,8 +52,10 @@ public partial class EditPhotoDetails : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pPhotoId", photoId);
             SqlDataReader reader = cmd.ExecuteReader();
             bool canEdit = false;
+            bool photoFound = false;
             while (reader.Read())
             {
+                photoFound = true;
                 Photo.ImageUrl = "Images/" + reader["PhotoName"].ToString();
                 Category.SelectedValue = reader["CategoryId"].ToString();
                 Album.SelectedValue = reader["AlbumId"].ToString();
@@ -68,6 +70,8 @@ public partial class EditPhotoDetails : System.Web.UI.Page
                 }
             }
             cn.Close();
+            if (!photoFound)
+                Response.Redirect("~/");
             if (!canEdit)
                 Response.Redirect("~/Photo.aspx?photo=" + Uri.UnescapeDataString(Request.Params["photo"]));
         }

@@ -21,6 +21,9 @@ public partial class User : System.Web.UI.Page
 
         String userName = Request.Params["username"];
 
+        if (Membership.GetUser(userName) == null)
+            Response.Redirect("~/Users.aspx");
+
         this.seeButtons = false;
         if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
         {

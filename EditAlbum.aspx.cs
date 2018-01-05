@@ -40,8 +40,10 @@ public partial class EditAlbum : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pAlbumId", AlbumId);
             SqlDataReader reader = cmd.ExecuteReader();
             bool canEdit = false;
+            bool albumFound = false;
             while (reader.Read())
             {
+                albumFound = true;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
@@ -55,6 +57,8 @@ public partial class EditAlbum : System.Web.UI.Page
                 DataBind();
             }
             cn.Close();
+            if (!albumFound)
+                Response.Redirect("~/");
             if (!canEdit)
                 Response.Redirect("~/Album.aspx?album=" + AlbumId);
         }
