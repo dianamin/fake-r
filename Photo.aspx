@@ -12,10 +12,11 @@
                 <asp:Panel class="btn-group" visible="<%# seeEditButtons %>" style="float: right;" runat="server" >
                     <asp:Button ID="EditPhotoDetails" runat="server" Text="Edit Details" 
                         class="btn btn-warning" onclick="EditPhotoDetails_Click" />
-                    <asp:Button ID="CropPhoto" runat="server" Text="Crop Photo" 
+                    <asp:Button ID="CropPhoto" runat="server" Text="Crop" 
                         class="btn btn-warning" onclick="CropPhoto_Click" />
                     <asp:Button ID="DeletePhoto" runat="server" Text="Delete" 
-                        class="btn btn-danger" onclick="DeletePhoto_Click" />
+                        class="btn btn-danger" onclick="DeletePhoto_Click" 
+                        OnClientClick="return confirm('Are you sure you want to delete this photo?')" />
                 </asp:Panel>
                 <br />
                 <i class="material-icons md-18">loyalty</i>
@@ -43,7 +44,8 @@
                             <div class="card-body">
                                 <asp:Button ID="DeleteComment" runat="server" Text="Delete" 
                                     class="btn btn-danger" style="float: right;" onclick="DeleteComment_Click" 
-                                    CommandArgument='<%# Eval("CommentId") %>' visible="<%# seeEditButtons %>" />
+                                    CommandArgument='<%# Eval("CommentId") %>' visible="<%# seeEditButtons %>"
+                                    OnClientClick="return confirm('Are you sure you want to delete this comment?')" />
                                 <h6 class="card-title"> 
                                     <i class="material-icons md-14">person</i>
                                     <%# Eval("UserName") %>

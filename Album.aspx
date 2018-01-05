@@ -9,7 +9,8 @@
         <li class="breadcrumb-item"> <asp:Label ID="AlbumName" runat="server" Text="Label" Font-Size="Large"></asp:Label> </li>
     </ol>
     <asp:Button ID="DeleteAlbum" runat="server" Text="Delete Album" 
-        onclick="DeleteAlbum_Click" class="btn btn-danger" visible="<%# canDelete %>"/>
+        onclick="DeleteAlbum_Click" class="btn btn-danger" visible="<%# canDelete %>"
+        OnClientClick="return confirm('Are you sure you want to delete this album?')" />
     <br />
     <br />
     <asp:ListView ID="Photos" runat="server">

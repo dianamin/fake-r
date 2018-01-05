@@ -152,8 +152,7 @@ public partial class Photo : System.Web.UI.Page
     }
 
     protected void DeleteComment_Click(object sender, EventArgs e)
-    {
-        if (Request.Params["photo"] == null) return;
+    {   
         int photoId = int.Parse(Request.Params["photo"]);
         int commentId = int.Parse(((Button)sender).CommandArgument.ToString());
         string deleteCommentsQuery =

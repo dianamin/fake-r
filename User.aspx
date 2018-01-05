@@ -16,7 +16,9 @@
         <RoleGroups>
             <asp:RoleGroup Roles="Admin">
                 <ContentTemplate>
-                    <asp:Button ID="DeleteUser" runat="server" Text="Delete account" OnClick="DeleteUser_Click" class="btn btn-danger"/>
+                    <asp:Button ID="DeleteUser" runat="server" Text="Delete account"
+                                OnClick="DeleteUser_Click" class="btn btn-danger"
+                                OnClientClick="return confirm('Are you sure you want to delete this user?')" />
                 </ContentTemplate>
             </asp:RoleGroup>
         </RoleGroups>
