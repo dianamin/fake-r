@@ -1,17 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Search.aspx.cs" Inherits="Search" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" 
-        SelectCommand="
-        SELECT TOP 100 PhotoId,p.Name as PhotoName,UploadDate,a.Name as AlbumName, a.AlbumId as AlbumId,p.Description as Description,c.Name,a.UserName as UserName
-        FROM [Photos] p, [Categories] c, [Albums] a
-        WHERE p.CategoryId = c.CategoryId AND a.AlbumId = p.AlbumId
-        ORDER BY p.UploadDate DESC">
+    <asp:TextBox ID="SearchBox" runat="server" class="form-control"></asp:TextBox>
+    <asp:Button ID="SearchButton" runat="server" class="btn btn-primary" Text="Search" onclick="Search_Click" />
+    <br />
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">
     </asp:SqlDataSource>
-    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
+    <asp:ListView ID="Results" runat="server" DataSourceID="SqlDataSource1">
         <ItemTemplate>
             <div class="card" style="width: 20rem; display: inline-block;">
                 <asp:Image ID="Image1" runat="server" class="card-img-top mx-auto d-block" 
@@ -33,7 +31,7 @@
                     </ol>
                     <h4 class="card-title">
                         <i class="material-icons">loyalty</i>
-                        <%# Eval("Name") %>
+                        <%# Eval("CategoryName") %>
                     </h4>
                     <div class="card-text">
                         <%# Eval("Description") %>

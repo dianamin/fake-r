@@ -60,6 +60,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="Search.aspx">Search</a>
                     <a class="nav-item nav-link" href="Categories.aspx">Categories</a>
                     <asp:LoginView ID="LoginView2" runat="server">
                         <LoggedInTemplate>
@@ -68,7 +69,7 @@
                     <a class="nav-item nav-link" href="Users.aspx">Users</a>
                     <asp:LoginView ID="LoginView3" runat="server">
                         <LoggedInTemplate>
-                            <a class="nav-item nav-link" href="AddPhoto.aspx">Add Photo</a>
+                            <a class="nav-item nav-link" href="AddPhoto.aspx">Upload</a>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
