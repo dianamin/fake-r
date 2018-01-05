@@ -7,13 +7,17 @@ using System.Web.UI.WebControls;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
+    protected String accountLinkUserName;
     protected void Page_Load(object sender, EventArgs e)
     {
         Attributes.Add("onClick", "test();");
-    }
 
-    protected void MyProfileLinkButton_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("~/User.aspx?username=" + Profile.UserName);
+        if (Page.IsPostBack) return;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            accountLinkUserName = Profile.UserName;
+            LoginView1.DataBind();
+        }
     }
 }

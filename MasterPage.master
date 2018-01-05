@@ -50,7 +50,7 @@
     
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
-  </head>
+</head>
 <body>
     <form id="form1" runat="server">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,7 +63,6 @@
                     <a class="nav-item nav-link" href="Categories.aspx">Categories</a>
                     <asp:LoginView ID="LoginView2" runat="server">
                         <LoggedInTemplate>
-                            <asp:LinkButton class="nav-item nav-link" ID="MyProfileLinkButton" runat="server" onclick="MyProfileLinkButton_Click">My Account</asp:LinkButton>    
                         </LoggedInTemplate>
                     </asp:LoginView>
                     <a class="nav-item nav-link" href="Users.aspx">Users</a>
@@ -76,15 +75,15 @@
                 <div class="navbar-nav">
                     <asp:LoginView ID="LoginView1" runat="server">
                         <AnonymousTemplate>
-                            <a class="nav-item nav-link" href="Register.aspx"> <i class="material-icons md-18">person</i> Register </a>
-                            <a class="nav-item nav-link" href="Login.aspx"> <i class="material-icons md-18">exit_to_app</i> Log in </a>
+                            <a class="nav-item nav-link" href="Register.aspx"> <i class="material-icons md-14">person</i> Register </a>
+                            <a class="nav-item nav-link" href="Login.aspx"> <i class="material-icons md-14">exit_to_app</i> Log in </a>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
-                            <i class="material-icons md-18">person</i>
-                            <div class="nav-item">
+                            <a class="nav-item nav-link" href='<%# "User.aspx?username=" + accountLinkUserName %>'>
+                                <i class="material-icons md-14">person</i>
                                 <asp:LoginName id="LogInName1" runat="server"/>
-                            </div>
-                            <a class="nav-item nav-link"> <asp:loginstatus id="LogInStatus1" runat="server"/> </a>
+                            </a>
+                            <asp:loginstatus class="nav-item nav-link" id="LogInStatus1" runat="server"/>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
@@ -96,11 +95,6 @@
         
             </asp:ContentPlaceHolder>
         </div>
-    
-    
-    
     </form>
-    
-    
-    </body>
+</body>
 </html>
