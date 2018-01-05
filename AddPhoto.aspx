@@ -26,7 +26,7 @@
         <asp:DropDownList ID="Album" runat="server" class="form-control" AutoPostBack="true"
             DataSourceID="AlbumsSource" DataTextField="Name" DataValueField="AlbumId">
         </asp:DropDownList>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="Category" ErrorMessage="Please choose an album!"></asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="Album" ErrorMessage="Please choose an album!"></asp:RequiredFieldValidator>
     </div>
     
     <asp:SqlDataSource ID="AlbumsSource" runat="server"

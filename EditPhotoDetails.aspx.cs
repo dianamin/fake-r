@@ -63,7 +63,7 @@ public partial class EditPhotoDetails : System.Web.UI.Page
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
                         canEdit = true;
-                    if (Roles.GetRolesForUser().Contains("Administrator"))
+                    if (Roles.GetRolesForUser().Contains("admin"))
                         canEdit = true;
                 }
             }

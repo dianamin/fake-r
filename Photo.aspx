@@ -30,11 +30,14 @@
                 <hr />
                 <asp:LoginView ID="LoginView2" runat="server">
                     <LoggedInTemplate>
-                        <div class="form-group form-inline">
+                        <asp:Panel id="CommentPanel" runat="server" class="form-group form-inline" DefaultButton="AddComment">
                             <asp:TextBox ID="CommentMessage" class="form-control" runat="server"></asp:TextBox>
-                            <asp:Button ID="AddComment" runat="server" Text="Post" 
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ValidationGroup="CommentGroup"
+                                    ControlToValidate="CommentMessage" ErrorMessage="The comment cannot be empty!">
+                            </asp:RequiredFieldValidator>
+                            <asp:Button ID="AddComment" runat="server" Text="Post" ValidationGroup="CommentGroup"
                                 class="btn btn-primary" onclick="AddComment_Click" style="margin-left: 3px;" />
-                        </div>
+                        </asp:Panel>
                     </LoggedInTemplate>
                 </asp:LoginView>
                 
