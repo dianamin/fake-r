@@ -38,7 +38,11 @@
                     </LoggedInTemplate>
                 </asp:LoginView>
                 
-                <asp:ListView ID="Comments" runat="server">
+    
+                <asp:SqlDataSource ID="CommentsSource" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">
+                </asp:SqlDataSource>
+                <asp:ListView ID="Comments" runat="server" DataSourceID="CommentsSource">
                     <ItemTemplate>
                         <div class="card">
                             <div class="card-body">

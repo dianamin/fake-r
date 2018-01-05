@@ -24,9 +24,9 @@ public partial class AddPhoto : System.Web.UI.Page
     {
         String imageName = DateTime.Now.ToString("dd-MM-yyyy-hh-mm-") + Guid.NewGuid().ToString() + ".jpg";
         Image.PostedFile.SaveAs(Server.MapPath("~/Images/") + imageName);
-        String description = Uri.UnescapeDataString(Description.Text);
-        int categoryId = int.Parse(Uri.UnescapeDataString(Category.SelectedValue));
-        int albumId = int.Parse(Uri.UnescapeDataString(Album.SelectedValue));
+        String description = Description.Text;
+        int categoryId = int.Parse(Category.SelectedValue);
+        int albumId = int.Parse(Album.SelectedValue);
         
         string insertPhotoQuery =
             "INSERT INTO Photos (Name, UserName, CategoryId, Description, AlbumId) " +

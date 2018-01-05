@@ -12,55 +12,48 @@ using System.Web.Security;
 public partial class Photo : System.Web.UI.Page
 {
     string photoName;
-    protected bool seeEditButtons;
+    protected bool seeEditButtons = false;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack) return;
         if (Request.Params["photo"] == null)
             Response.Redirect("~/");
-        int photoId = int.Parse(Request.Params["photo"]);
+        String photoId = Request.Params["photo"];
         this.fetchPhoto(photoId);
         this.fetchComments(photoId);
     }
 
     protected void AddComment_Click(object sender, EventArgs e)
     {
-        if (Request.Params["photo"] != null)
+        String photoId = Request.Params["photo"];
+
+        TextBox CommentMessage = (TextBox)LoginView2.FindControl("CommentMessage");
+        string commentMessage = CommentMessage.Text; 
+
+        string insertCommentQuery = 
+            "INSERT INTO Comments (PhotoId,UserName,Message) " +
+            "VALUES (@pPhotoId,@pUserName,@pMessage)";
+
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        try
         {
-            int photoId = int.Parse(Request.Params["photo"]);
-
-            TextBox CommentMessage = (TextBox)LoginView2.FindControl("CommentMessage");
-            string commentMessage = CommentMessage.Text; 
-
-            string insertCommentQuery = 
-                "INSERT INTO Comments (PhotoId,UserName,Message) " +
-                "VALUES (@pPhotoId,@pUserName,@pMessage)";
-
-            SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-            try
-            {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand(insertCommentQuery, cn);
-                cmd.Parameters.AddWithValue("pPhotoId", photoId);
-                cmd.Parameters.AddWithValue("pUserName", Profile.UserName);
-                cmd.Parameters.AddWithValue("pMessage", commentMessage);
-                cmd.ExecuteNonQuery();
-                cn.Close();
-                CommentMessage.Text = "";
-            }
-            catch (Exception exCMD)
-            {
-                Console.WriteLine(exCMD.Message);
-            }
-            finally
-            {
-                this.fetchComments(photoId);
-            }
+            cn.Open();
+            SqlCommand cmd = new SqlCommand(insertCommentQuery, cn);
+            cmd.Parameters.AddWithValue("pPhotoId", photoId);
+            cmd.Parameters.AddWithValue("pUserName", Profile.UserName);
+            cmd.Parameters.AddWithValue("pMessage", commentMessage);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+            Response.Redirect("~/Photo.aspx?photo=" + photoId);
+        }
+        catch (Exception exCMD)
+        {
+            Console.WriteLine(exCMD.Message);
         }
     }
 
-    private void fetchPhoto(int photoId)
+    private void fetchPhoto(String photoId)
     {
         string photoQuery =
             "SELECT p.Name as PhotoName, p.UserName as UserName, c.Name as Category, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description " +
@@ -86,7 +79,7 @@ public partial class Photo : System.Web.UI.Page
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
                         this.seeEditButtons = true;
-                    if (Roles.GetRolesForUser().Contains("Administrator"))
+                    if (Roles.GetRolesForUser().Contains("admin"))
                         this.seeEditButtons = true;
                 }
                 DataBind();
@@ -99,27 +92,15 @@ public partial class Photo : System.Web.UI.Page
         }
     }
 
-    private void fetchComments(int photoId)
+    private void fetchComments(String photoId)
     {
-        string commentsQuery = 
+        CommentsSource.SelectCommand =
             "SELECT CommentId, UserName, Message, PostDate " + 
             "FROM Comments " + 
             "WHERE PhotoId=@pPhotoId ORDER BY PostDate Desc";
-        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-        try
-        {
-            cn.Open();
-            SqlCommand cmd = new SqlCommand(commentsQuery, cn);
-            cmd.Parameters.AddWithValue("pPhotoId", photoId);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Comments.DataSource = reader;
-            Comments.DataBind();
-            cn.Close();
-        }
-        catch (Exception exCMD)
-        {
-            Console.WriteLine(exCMD.Message);
-        }
+        CommentsSource.SelectParameters.Clear();
+        CommentsSource.SelectParameters.Add("pPhotoId", photoId);
+        Page.DataBind();
     }
 
     protected void DeletePhoto_Click(object sender, EventArgs e)
@@ -153,9 +134,9 @@ public partial class Photo : System.Web.UI.Page
 
     protected void DeleteComment_Click(object sender, EventArgs e)
     {   
-        int photoId = int.Parse(Request.Params["photo"]);
-        int commentId = int.Parse(((Button)sender).CommandArgument.ToString());
-        string deleteCommentsQuery =
+        String photoId = Request.Params["photo"];
+        String commentId = ((Button)sender).CommandArgument.ToString();
+        String deleteCommentsQuery =
             "DELETE FROM Comments " +
             "WHERE CommentId = @pCommentId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
@@ -166,7 +147,7 @@ public partial class Photo : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pCommentId", commentId);
             cmd.ExecuteNonQuery();
             cn.Close();
-            this.fetchComments(photoId);
+            Response.Redirect("~/Photo.aspx?photo=" + photoId);
         }
         catch (Exception exCMD)
         {
