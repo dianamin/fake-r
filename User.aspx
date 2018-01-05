@@ -38,7 +38,11 @@
     <asp:Button ID="AddAlbum" runat="server" Text="New album" 
         onclick="AddAlbum_Click" class="btn btn-primary" visible="<%# seeButtons %>"/>
     <br />
-    <asp:Repeater ID="Albums" runat="server">
+    
+    <asp:SqlDataSource ID="AlbumsSource" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">
+    </asp:SqlDataSource>
+    <asp:Repeater ID="Albums" runat="server" DataSourceID="AlbumsSource">
         <ItemTemplate>
             <div class="card" style="width: 10rem; display: inline-block;">
                 <div class="card-body text-center">

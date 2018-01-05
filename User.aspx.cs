@@ -48,26 +48,14 @@ public partial class User : System.Web.UI.Page
 
     private void fetchAlbums(string userName)
     {
-        string albumsQuery =
-            "SELECT a.AlbumId,a.Name,a.Description,COUNT(PhotoId) as PhotosCount " +
+        AlbumsSource.SelectCommand =
+            "SELECT a.AlbumId, a.Name, a.Description, COUNT(PhotoId) as PhotosCount " +
             "FROM Albums a LEFT JOIN Photos p ON (a.AlbumId = p.AlbumId) " +
             "WHERE a.UserName=@pUserName " +
             "GROUP BY a.AlbumId,a.Name,a.Description"; 
-        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-        try
-        {
-            cn.Open();
-            SqlCommand cmd = new SqlCommand(albumsQuery, cn);
-            cmd.Parameters.AddWithValue("pUserName", userName);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Albums.DataSource = reader;
-            Albums.DataBind();
-            cn.Close();
-        }
-        catch (Exception exCMD)
-        {
-            Console.WriteLine(exCMD.Message);
-        }
+        AlbumsSource.SelectParameters.Clear();
+        AlbumsSource.SelectParameters.Add("pUserName", userName);
+        Page.DataBind();
     }
 
     protected void ChangeRole_Click(object sender, EventArgs e)
