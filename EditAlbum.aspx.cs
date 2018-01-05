@@ -39,9 +39,9 @@ public partial class EditAlbum : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(albumQuery, cn);
             cmd.Parameters.AddWithValue("pAlbumId", AlbumId);
             SqlDataReader reader = cmd.ExecuteReader();
+            bool canEdit = false;
             while (reader.Read())
             {
-                bool canEdit = false;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
@@ -49,14 +49,14 @@ public partial class EditAlbum : System.Web.UI.Page
                     if (Roles.GetRolesForUser().Contains("Administrator"))
                         canEdit = true;
                 }
-                if (!canEdit)
-                    Response.Redirect("~/Album.aspx?album=" + AlbumId);
 
                 Name.Text = reader["Name"].ToString();
                 Description.Text = reader["Description"].ToString();
                 DataBind();
             }
             cn.Close();
+            if (!canEdit)
+                Response.Redirect("~/Album.aspx?album=" + AlbumId);
         }
         catch (Exception exCMD)
         {
@@ -83,7 +83,7 @@ public partial class EditAlbum : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pDescription", description);
             cmd.ExecuteNonQuery();
             cn.Close();
-            Response.Redirect("~/User.aspx?username=" + Profile.UserName);
+            Response.Redirect("~/Album.aspx?album=" + Request.Params["album"]);
         }
         catch (Exception exCMD)
         {

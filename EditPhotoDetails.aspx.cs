@@ -51,6 +51,7 @@ public partial class EditPhotoDetails : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(photoQuery, cn);
             cmd.Parameters.AddWithValue("pPhotoId", photoId);
             SqlDataReader reader = cmd.ExecuteReader();
+            bool canEdit = false;
             while (reader.Read())
             {
                 Photo.ImageUrl = "Images/" + reader["PhotoName"].ToString();
@@ -58,7 +59,6 @@ public partial class EditPhotoDetails : System.Web.UI.Page
                 Album.SelectedValue = reader["AlbumId"].ToString();
                 Description.Text = reader["Description"].ToString();
 
-                bool canEdit = false;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
@@ -66,10 +66,10 @@ public partial class EditPhotoDetails : System.Web.UI.Page
                     if (Roles.GetRolesForUser().Contains("Administrator"))
                         canEdit = true;
                 }
-                if (!canEdit)
-                    Response.Redirect("~/Photo.aspx?photo=" + Uri.UnescapeDataString(Request.Params["photo"]));
             }
             cn.Close();
+            if (!canEdit)
+                Response.Redirect("~/Photo.aspx?photo=" + Uri.UnescapeDataString(Request.Params["photo"]));
         }
         catch (Exception exCMD)
         {
