@@ -47,8 +47,8 @@ public partial class Category : System.Web.UI.Page
     {
         string photosQuery =
         PhotosSource.SelectCommand =
-            "SELECT PhotoId, p.Name as PhotoName, p.UserName as UserName, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description " +
-            "FROM Photos p, Albums a  " +
+            "SELECT PhotoId, p.Name as PhotoName, a.UserName as UserName, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description " +
+            "FROM Photos p, Albums a " +
             "WHERE CategoryId = @pCategoryId AND p.AlbumId = a.AlbumId " +
             "ORDER BY UploadDate DESC";
         PhotosSource.SelectParameters.Clear();

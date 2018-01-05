@@ -41,8 +41,8 @@ public partial class EditPhotoDetails : System.Web.UI.Page
     private void fetchPhoto(String photoId)
     {
         string photoQuery =
-            "SELECT Name as PhotoName, UserName, CategoryId, AlbumId, Description " +
-            "FROM Photos " +
+            "SELECT p.Name as PhotoName, a.UserName, CategoryId, a.AlbumId, p.Description " +
+            "FROM Photos p JOIN Albums a ON (a.AlbumId = p.AlbumId) " +
             "WHERE PhotoId=@pPhotoId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         cn.Open();

@@ -62,8 +62,8 @@ public partial class Album : System.Web.UI.Page
     private void fetchPhotos(String AlbumId)
     {
         PhotosSource.SelectCommand =
-            "SELECT PhotoId, p.Name as PhotoName, p.UserName, UploadDate, c.Name as CategoryName, p.Description as Description " +
-            "FROM Photos p JOIN Categories c ON (p.CategoryId = c.CategoryId) " +
+            "SELECT PhotoId, p.Name as PhotoName, a.UserName, UploadDate, c.Name as CategoryName, p.Description as Description " +
+            "FROM Photos p JOIN Categories c ON (p.CategoryId = c.CategoryId) JOIN Albums a ON (a.AlbumId = p.AlbumId) " +
             "WHERE p.AlbumId = @pAlbumId " +
             "ORDER BY UploadDate DESC";
         PhotosSource.SelectParameters.Clear();

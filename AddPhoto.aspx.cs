@@ -29,8 +29,8 @@ public partial class AddPhoto : System.Web.UI.Page
         int albumId = int.Parse(Album.SelectedValue);
         
         string insertPhotoQuery =
-            "INSERT INTO Photos (Name, UserName, CategoryId, Description, AlbumId) " +
-            "VALUES (@pImageName, @pUserName, @pCategoryId, @pDescription, @pAlbumId)";
+            "INSERT INTO Photos (Name, CategoryId, Description, AlbumId) " +
+            "VALUES (@pImageName, @pCategoryId, @pDescription, @pAlbumId)";
 
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         try

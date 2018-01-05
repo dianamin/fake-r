@@ -9,7 +9,7 @@
                         FROM (
                         SELECT u.UserName as UserName, COUNT(p.PhotoId) as PhotosCount
                         FROM aspnet_Users u
-                        LEFT JOIN Photos p ON (u.UserName = p.UserName)
+                        LEFT JOIN Albums a ON (a.UserName = u.UserName) LEFT JOIN Photos p ON (a.AlbumId = p.AlbumId)
                         GROUP BY u.UserName
                         ) photosCount JOIN (
                         SELECT u.UserName as UserName, COUNT(a.AlbumId) as AlbumsCount

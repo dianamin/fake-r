@@ -31,7 +31,7 @@ public partial class CropPhoto : System.Web.UI.Page
     private void fetchPhoto(int photoId)
     {
         string photoQuery =
-            "SELECT p.Name as PhotoName, p.UserName as UserName, c.Name as Category, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description " +
+            "SELECT p.Name as PhotoName, a.UserName as UserName, c.Name as Category, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description " +
             "FROM Photos p JOIN Categories c ON (c.CategoryId = p.CategoryId) JOIN Albums a ON (a.AlbumId = p.AlbumId) " +
             "WHERE PhotoId=@pPhotoId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);

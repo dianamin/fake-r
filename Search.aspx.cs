@@ -17,7 +17,7 @@ public partial class Search : System.Web.UI.Page
     protected void search(String text)
     {
         SqlDataSource1.SelectCommand =
-            "SELECT PhotoId, p.Name as PhotoName, p.UserName, UploadDate, a.AlbumId, a.Name as AlbumName, c.Name as CategoryName, p.Description as Description " +
+            "SELECT PhotoId, p.Name as PhotoName, a.UserName, UploadDate, a.AlbumId, a.Name as AlbumName, c.Name as CategoryName, p.Description as Description " +
             "FROM Photos p JOIN Categories c ON (p.CategoryId = c.CategoryId) JOIN Albums a ON (p.AlbumId = a.AlbumId) " +
             "WHERE LOWER(p.Description) LIKE @p Or LOWER(a.Name) LIKE @p OR LOWER(c.Name) Like @p " +
             "ORDER BY UploadDate DESC";
