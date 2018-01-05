@@ -17,12 +17,11 @@ public partial class Photo : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack) return;
-        if (Request.Params["photo"] != null)
-        {
-            int photoId = int.Parse(Request.Params["photo"]);
-            this.fetchPhoto(photoId);
-            this.fetchComments(photoId);
-        }
+        if (Request.Params["photo"] == null)
+            Response.Redirect("~/");
+        int photoId = int.Parse(Request.Params["photo"]);
+        this.fetchPhoto(photoId);
+        this.fetchComments(photoId);
     }
 
     protected void AddComment_Click(object sender, EventArgs e)

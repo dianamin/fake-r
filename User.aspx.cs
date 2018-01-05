@@ -14,7 +14,11 @@ public partial class User : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.Params["username"] == null) return;
+        if (Page.IsPostBack) return;
+
+        if (Request.Params["username"] == null)
+            Response.Redirect("~/Users.aspx");
+
         String userName = Request.Params["username"];
 
         this.seeButtons = false;

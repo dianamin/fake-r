@@ -20,11 +20,11 @@ public partial class EditPhoto : System.Web.UI.Page
             Response.Redirect("~/Login.aspx");
         }
         
-        if (Request.Params["photo"] != null)
-        {
-            int photoId = int.Parse(Request.Params["photo"]);
-            this.fetchPhoto(photoId);
-        }
+        if (Request.Params["photo"] == null)
+            Response.Redirect("~/");
+
+        int photoId = int.Parse(Request.Params["photo"]);
+        this.fetchPhoto(photoId);
     }
 
     private void fetchPhoto(int photoId)
@@ -43,9 +43,7 @@ public partial class EditPhoto : System.Web.UI.Page
             while (reader.Read())
             {
                 if ((string)reader["UserName"] != Profile.UserName)
-                {
                     Response.Redirect("~/Photo.aspx?photo=" + Request.Params["photo"]);
-                }
 
                 imgUpload.ImageUrl = "Images/" + reader["PhotoName"].ToString();
             }

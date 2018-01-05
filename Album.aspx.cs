@@ -14,7 +14,9 @@ public partial class Album : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.Params["album"] == null) return;
+        if (Page.IsPostBack) return;
+        if (Request.Params["album"] == null)
+            Response.Redirect("~/");
         int id = int.Parse(Request.Params["album"]);
         this.fetchAlbumDetails(id);
         this.fetchPhotos(id);
