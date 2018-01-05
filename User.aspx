@@ -12,10 +12,12 @@
         <p><asp:Label ID="JoinDate" runat="server"></asp:Label></p>
       </div>
     </div>
-    <asp:LoginView runat="server">
+    <asp:LoginView ID="AdminView" runat="server">
         <RoleGroups>
             <asp:RoleGroup Roles="Admin">
                 <ContentTemplate>
+                    <asp:Label ID="UserRole" runat="server" Text="Label"></asp:Label>
+                    <br />
                     <div class="btn-group">
                         <asp:Button ID="ChangeRole" runat="server" Text="Change role"
                                     OnClick="ChangeRole_Click" class="btn btn-danger"

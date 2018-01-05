@@ -32,6 +32,10 @@ public partial class User : System.Web.UI.Page
         this.UserName.Text = userName;
         this.fetchProfie(userName);
         this.fetchAlbums(userName);
+
+        string role = (Roles.GetRolesForUser(userName).Contains("member")) ? "member" : "admin";
+        Label UserRole = (Label) AdminView.FindControl("UserRole");
+        if (UserRole != null) UserRole.Text = role;
     }
 
     private void fetchProfie(string userName)
@@ -80,7 +84,7 @@ public partial class User : System.Web.UI.Page
             Roles.RemoveUserFromRole(username, "admin");
             Roles.AddUserToRole(username, "member");
         }
-        Response.Redirect("~/User.aspx?username" + username);
+        Response.Redirect("~/User.aspx?username=" + username);
     }
 
     protected void DeleteUser_Click(object sender, EventArgs e)
