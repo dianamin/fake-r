@@ -7,7 +7,11 @@
         <i class="material-icons md-14">loyalty</i>
         <asp:Label ID="CategoryName" runat="server" Text="Label"></asp:Label>
     </h4>
-    <asp:ListView ID="Photos" runat="server">
+    
+    <asp:SqlDataSource ID="PhotosSource" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">
+    </asp:SqlDataSource>
+    <asp:ListView ID="Photos" runat="server" DataSourceID="PhotosSource">
         <ItemTemplate>
             <div class="card" style="width: 20rem; display: inline-block;">
                 <asp:Image ID="Image1" runat="server" class="card-img-top mx-auto d-block"

@@ -14,12 +14,12 @@ public partial class Category : System.Web.UI.Page
         if (Request.Params["category"] == null)
             Response.Redirect("~/Categories.aspx");
         if (Page.IsPostBack) return;
-        int id = int.Parse(Request.Params["category"]);
+        String id = Uri.UnescapeDataString(Request.Params["category"]);
         this.fetchCategoryDetails(id);
         this.fetchPhotos(id);
     }
 
-    private void fetchCategoryDetails(int CategoryId)
+    private void fetchCategoryDetails(String CategoryId)
     {
         string categoryQuery =
             "SELECT Name FROM Categories " + 
@@ -43,27 +43,16 @@ public partial class Category : System.Web.UI.Page
         }
     }
 
-    private void fetchPhotos(int CategoryId)
+    private void fetchPhotos(String CategoryId)
     {
         string photosQuery =
+        PhotosSource.SelectCommand =
             "SELECT PhotoId, p.Name as PhotoName, p.UserName as UserName, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description " +
             "FROM Photos p, Albums a  " +
             "WHERE CategoryId = @pCategoryId AND p.AlbumId = a.AlbumId " +
             "ORDER BY UploadDate DESC";
-        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-        try
-        {
-            cn.Open();
-            SqlCommand cmd = new SqlCommand(photosQuery, cn);
-            cmd.Parameters.AddWithValue("pCategoryId", CategoryId);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Photos.DataSource = reader;
-            Photos.DataBind();
-            cn.Close();
-        }
-        catch (Exception exCMD)
-        {
-            Console.WriteLine(exCMD.Message);
-        }
+        PhotosSource.SelectParameters.Clear();
+        PhotosSource.SelectParameters.Add("pCategoryId", CategoryId);
+        Page.DataBind();
     }
 }
