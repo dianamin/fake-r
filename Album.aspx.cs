@@ -10,7 +10,7 @@ using System.Web.Security;
 
 public partial class Album : System.Web.UI.Page
 {
-    protected bool canDelete;
+    protected bool seeEditButtons;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -39,14 +39,15 @@ public partial class Album : System.Web.UI.Page
             {
                 AlbumName.Text = reader["Name"].ToString();
                 UserName.Text = reader["UserName"].ToString();
+                Description.Text = reader["Description"].ToString();
 
-                this.canDelete = false;
+                this.seeEditButtons = false;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
-                        this.canDelete = true;
+                        this.seeEditButtons = true;
                     if (Roles.GetRolesForUser().Contains("Administrator"))
-                        this.canDelete = true;
+                        this.seeEditButtons = true;
                 }
                 DataBind();
             }
@@ -103,5 +104,11 @@ public partial class Album : System.Web.UI.Page
         {
             Console.WriteLine(exCMD.Message);
         }
+    }
+
+    protected void EditAlbum_Click(object sender, EventArgs e)
+    {
+        String albumId = Request.Params["album"];
+        Response.Redirect("~/EditAlbum.aspx?album=" + albumId);
     }
 }

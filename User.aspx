@@ -26,7 +26,7 @@
     <br />
     <br />
     <h2> Albums </h2>
-    <asp:Button ID="AddAlbum" runat="server" Text="Add Album" 
+    <asp:Button ID="AddAlbum" runat="server" Text="New album" 
         onclick="AddAlbum_Click" class="btn btn-primary" visible="<%# seeButtons %>"/>
     <br />
     <asp:Repeater ID="Albums" runat="server">

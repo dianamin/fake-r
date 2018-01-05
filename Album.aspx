@@ -8,9 +8,15 @@
         <li class="breadcrumb-item"> <asp:Label ID="UserName" runat="server" Text="Label"></asp:Label> </li>
         <li class="breadcrumb-item"> <asp:Label ID="AlbumName" runat="server" Text="Label" Font-Size="Large"></asp:Label> </li>
     </ol>
-    <asp:Button ID="DeleteAlbum" runat="server" Text="Delete Album" 
-        onclick="DeleteAlbum_Click" class="btn btn-danger" visible="<%# canDelete %>"
-        OnClientClick="return confirm('Are you sure you want to delete this album?')" />
+    <asp:Label ID="Description" runat="server" Text=""></asp:Label>
+    <br />
+    <asp:Panel ID="Panel1" class="btn-group" visible="<%# seeEditButtons %>" style="float: right;" runat="server" >
+        <asp:Button ID="EditAlbum" runat="server" Text="Edit album" 
+            class="btn btn-warning" onclick="EditAlbum_Click" />
+        <asp:Button ID="DeleteAlbum" runat="server" Text="Delete album" 
+            onclick="DeleteAlbum_Click" class="btn btn-danger"
+            OnClientClick="return confirm('Are you sure you want to delete this album?')" />
+    </asp:Panel>
     <br />
     <br />
     <asp:ListView ID="Photos" runat="server">
