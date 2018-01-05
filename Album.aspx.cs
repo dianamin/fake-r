@@ -17,17 +17,17 @@ public partial class Album : System.Web.UI.Page
         if (Page.IsPostBack) return;
         if (Request.Params["album"] == null)
             Response.Redirect("~/");
-        int id = int.Parse(Request.Params["album"]);
+        String id = Uri.UnescapeDataString(Request.Params["album"]);
         this.fetchAlbumDetails(id);
         this.fetchPhotos(id);
     }
 
-    private void fetchAlbumDetails(int AlbumId)
+    private void fetchAlbumDetails(String AlbumId)
     {
         string albumQuery = 
             "SELECT UserName, Name, Description, CreatedDate " +
             "FROM Albums " +
-            "WHERE AlbumId=@pAlbumId";
+            "WHERE AlbumId = @pAlbumId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         cn.Open();
         try
@@ -46,7 +46,7 @@ public partial class Album : System.Web.UI.Page
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
                         this.seeEditButtons = true;
-                    if (Roles.GetRolesForUser().Contains("Administrator"))
+                    if (Roles.GetRolesForUser().Contains("Admin"))
                         this.seeEditButtons = true;
                 }
                 DataBind();
@@ -59,34 +59,22 @@ public partial class Album : System.Web.UI.Page
         }
     }
 
-    private void fetchPhotos(int AlbumId)
+    private void fetchPhotos(String AlbumId)
     {
         string photosQuery =
+        PhotosSource.SelectCommand =
             "SELECT PhotoId, p.Name as PhotoName, p.UserName, UploadDate, c.Name as CategoryName, p.Description as Description " +
             "FROM Photos p JOIN Categories c ON (p.CategoryId = c.CategoryId) " +
             "WHERE p.AlbumId = @pAlbumId " +
             "ORDER BY UploadDate DESC";
-        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-        try
-        {
-            cn.Open();
-            SqlCommand cmd = new SqlCommand(photosQuery, cn);
-            cmd.Parameters.AddWithValue("pAlbumId", AlbumId);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Photos.DataSource = reader;
-            Photos.DataBind();
-            cn.Close();
-        }
-        catch (Exception exCMD)
-        {
-            Console.WriteLine(exCMD.Message);
-        }
+        PhotosSource.SelectParameters.Clear();
+        PhotosSource.SelectParameters.Add("pAlbumId", AlbumId);
+        Page.DataBind();
     }
 
     protected void DeleteAlbum_Click(object sender, EventArgs e)
     {
-        if (Request.Params["album"] == null) return;
-        int albumId = int.Parse(Request.Params["album"]);
+        int albumId = int.Parse(Uri.UnescapeDataString(Request.Params["album"]));
         string deletePhotoQuery =
             "DELETE FROM Albums " +
             "WHERE AlbumId = @pAlbumId";
