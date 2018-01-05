@@ -10,6 +10,8 @@
             </div>
             <div class="col-sm-4 jumbotron" style="height: 80vh; overflow-y: scroll;">
                 <asp:Panel class="btn-group" visible="<%# seeEditButtons %>" style="float: right;" runat="server" >
+                    <asp:Button ID="EditPhotoDetails" runat="server" Text="Edit Details" 
+                        class="btn btn-warning" onclick="EditPhotoDetails_Click" />
                     <asp:Button ID="CropPhoto" runat="server" Text="Crop Photo" 
                         class="btn btn-warning" onclick="CropPhoto_Click" />
                     <asp:Button ID="DeletePhoto" runat="server" Text="Delete" 

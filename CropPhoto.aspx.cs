@@ -8,6 +8,7 @@ using System.IO;
 using System.Drawing;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.Security;
 
 public partial class CropPhoto : System.Web.UI.Page
 {
@@ -42,7 +43,13 @@ public partial class CropPhoto : System.Web.UI.Page
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                if ((string)reader["UserName"] != Profile.UserName)
+                bool canEdit = false;
+                if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    if (Profile.UserName == reader["UserName"].ToString())
+                        canEdit = true;
+                }
+                if (!canEdit)
                     Response.Redirect("~/Photo.aspx?photo=" + Request.Params["photo"]);
 
                 imgUpload.ImageUrl = "Images/" + reader["PhotoName"].ToString();

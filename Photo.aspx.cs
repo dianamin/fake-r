@@ -124,7 +124,6 @@ public partial class Photo : System.Web.UI.Page
 
     protected void DeletePhoto_Click(object sender, EventArgs e)
     {
-        if (Request.Params["photo"] == null) return;
         int photoId = int.Parse(Request.Params["photo"]);
         string deletePhotoQuery =
             "DELETE FROM Photos " +
@@ -178,8 +177,13 @@ public partial class Photo : System.Web.UI.Page
 
     protected void CropPhoto_Click(object sender, EventArgs e)
     {
-        if (Request.Params["photo"] == null) return;
         String photoId = Request.Params["photo"];
         Response.Redirect("~/CropPhoto.aspx?photo=" + photoId);
+    }
+
+    protected void EditPhotoDetails_Click(object sender, EventArgs e)
+    {
+        String photoId = Request.Params["photo"];
+        Response.Redirect("~/EditPhotoDetails.aspx?photo=" + photoId);
     }
 }
