@@ -66,6 +66,23 @@ public partial class User : System.Web.UI.Page
         }
     }
 
+    protected void ChangeRole_Click(object sender, EventArgs e)
+    {
+        string username = Request.Params["username"];
+
+        if (Roles.GetRolesForUser(username).Contains("member"))
+        {
+            Roles.RemoveUserFromRole(username, "member");
+            Roles.AddUserToRole(username, "admin");
+        }
+        else
+        {
+            Roles.RemoveUserFromRole(username, "admin");
+            Roles.AddUserToRole(username, "member");
+        }
+        Response.Redirect("~/User.aspx?username" + username);
+    }
+
     protected void DeleteUser_Click(object sender, EventArgs e)
     {
         string username = Request.Params["username"];

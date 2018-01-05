@@ -30,7 +30,6 @@ public partial class Register : System.Web.UI.Page
 
         t = CreateUserWizard1.FindControl("TBDescription") as TextBox;
         if (t != null) Profile.Description = t.Text;
-
         Profile.JoinDate = DateTime.Now;
     }
 
