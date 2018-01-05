@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class EditPhoto : System.Web.UI.Page
+public partial class CropPhoto : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
