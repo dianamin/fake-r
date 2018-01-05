@@ -54,27 +54,12 @@ public partial class AddPhoto : System.Web.UI.Page
 
     private void fetchUserAlbums()
     {
-        if (Album == null) return;
-        string albumsQuery =
+        AlbumsSource.SelectCommand = 
             "SELECT AlbumId, Name " +
             "FROM Albums " +
             "WHERE UserName=@pUserName";
-        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-        try
-        {
-            cn.Open();
-            SqlCommand cmd = new SqlCommand(albumsQuery, cn);
-            cmd.Parameters.AddWithValue("pUserName", Profile.UserName);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Album.DataSource = reader;
-            Album.DataValueField = "AlbumId";
-            Album.DataTextField = "Name";
-            Album.DataBind();
-            cn.Close();
-        }
-        catch (Exception exCMD)
-        {
-            Console.WriteLine(exCMD.Message);
-        }
+        AlbumsSource.SelectParameters.Clear();
+        AlbumsSource.SelectParameters.Add("pUserName", Profile.UserName);
+        Page.DataBind();
     }
 }
