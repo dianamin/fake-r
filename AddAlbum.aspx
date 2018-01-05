@@ -14,6 +14,8 @@
         <asp:TextBox ID="Description" runat="server" class="form-control"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Description" ErrorMessage="Please add a description!"></asp:RequiredFieldValidator>
     </div>
+    <asp:Label ID="AlbumError" runat="server" Text=""></asp:Label>
+    <br />
     <asp:Button ID="SaveAlbum" runat="server" Text="Save" class="btn btn-primary" 
         onclick="SaveAlbum_Click" />
 </asp:Content>

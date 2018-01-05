@@ -40,7 +40,7 @@ public partial class AddAlbum : System.Web.UI.Page
         }
         catch (Exception exCMD)
         {
-            Console.WriteLine(exCMD.Message);
+            AlbumError.Text = exCMD.Message;
         }
     }
 }
