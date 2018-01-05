@@ -81,6 +81,11 @@ public partial class User : System.Web.UI.Page
         }
         else
         {
+            if (Roles.GetUsersInRole("admin").Length <= 2)
+            {
+                ((Label)AdminView.FindControl("UserError")).Text = ("This website cannot have less than 2 admins.");
+                return;
+            }
             Roles.RemoveUserFromRole(username, "admin");
             Roles.AddUserToRole(username, "member");
         }
@@ -90,6 +95,11 @@ public partial class User : System.Web.UI.Page
     protected void DeleteUser_Click(object sender, EventArgs e)
     {
         string username = Request.Params["username"];
+        if (Roles.GetRolesForUser(username).Contains("admin") && Roles.GetUsersInRole("admin").Length <= 2)
+        {
+            ((Label)AdminView.FindControl("UserError")).Text = ("This website cannot have less than 2 admins.");
+            return;
+        }
         Membership.DeleteUser(username);
         Response.Redirect("~/Users.aspx");
     }

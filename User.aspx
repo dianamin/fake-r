@@ -26,6 +26,8 @@
                                     OnClick="DeleteUser_Click" class="btn btn-danger"
                                     OnClientClick="return confirm('Are you sure you want to delete this user?')" />
                     </div>
+                    <br />
+                    <asp:Label ID="UserError" runat="server"></asp:Label>
                 </ContentTemplate>
             </asp:RoleGroup>
         </RoleGroups>
