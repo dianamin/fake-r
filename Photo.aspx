@@ -34,11 +34,12 @@
                 </p>
                 <div id="googleMap" style="width:100%; height:150px;"></div>
                 <asp:Panel ID="Panel1" visible="<%# SeeEditButtons %>" runat="server">
+                    <br />
                     <div class="btn-group">
                         <asp:Button ID="EditPhotoDetails" runat="server" Text="Edit Details" 
-                            class="btn btn-warning" onclick="EditPhotoDetails_Click" />
+                            class="btn btn-default" onclick="EditPhotoDetails_Click" />
                         <asp:Button ID="CropPhoto" runat="server" Text="Crop" 
-                            class="btn btn-warning" onclick="CropPhoto_Click" />
+                            class="btn btn-default" onclick="CropPhoto_Click" />
                         <asp:Button ID="DeletePhoto" runat="server" Text="Delete" 
                             class="btn btn-danger" onclick="DeletePhoto_Click" 
                             OnClientClick="return confirm('Are you sure you want to delete this photo?')" />
@@ -98,7 +99,7 @@
     <script>
         function myMap() {
             let mapProp = {
-                center:new google.maps.LatLng(<%# Lattitude %>, <%# Longitude %>),
+                center:new google.maps.LatLng(<%# Latitude %>, <%# Longitude %>),
                 zoom:5,
             };
 

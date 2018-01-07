@@ -15,7 +15,7 @@ public partial class Photo : System.Web.UI.Page
     protected string AlbumId;
     protected string AlbumName;
     protected string UserName;
-    protected double Lattitude;
+    protected double Latitude;
     protected double Longitude;
     protected bool SeeEditButtons = false;
 
@@ -61,7 +61,7 @@ public partial class Photo : System.Web.UI.Page
     private void fetchPhoto(String photoId)
     {
         string photoQuery =
-            "SELECT p.Name as PhotoName, a.UserName as UserName, c.Name as Category, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description " +
+            "SELECT p.Name as PhotoName, a.UserName as UserName, c.Name as Category, UploadDate, a.Name as AlbumName, a.AlbumId as AlbumId, p.Description as Description, Latitude, Longitude " +
             "FROM Photos p JOIN Categories c ON (c.CategoryId = p.CategoryId) JOIN Albums a ON (a.AlbumId = p.AlbumId) " + 
             "WHERE PhotoId=@pPhotoId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
@@ -82,8 +82,8 @@ public partial class Photo : System.Web.UI.Page
                 Description.Text = reader["Description"].ToString();
                 UploadDate.Text = reader["UploadDate"].ToString();
                 
-                this.Lattitude = 51.508742;
-                this.Longitude = -0.120850;
+                this.Latitude = Double.Parse(reader["Latitude"].ToString());
+                this.Longitude = Double.Parse(reader["Longitude"].ToString());
 
                 this.SeeEditButtons = false;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
