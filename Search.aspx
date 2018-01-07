@@ -18,9 +18,10 @@
     </div>
     <br />
     <div class="input-group">
-        <asp:TextBox ID="LocationBox" runat="server" class="form-control" ClientIDMode="Static"></asp:TextBox>
+        <asp:TextBox ID="LocationBox" runat="server" class="form-control" ClientIDMode="Static" style="border-bottom-left-radius: 0"></asp:TextBox>
         <div class="input-group-btn">
-            <asp:Button ID="Button1" runat="server" class="btn btn-default" Text="Search by Location" onclick="SearchLocation_Click" />
+            <asp:Button ID="Button1" runat="server" class="btn btn-default" Text="Search by location"
+                        style="border-bottom-right-radius: 0" onclick="SearchLocation_Click" />
         </div>
         <input id="Hidden1" type="hidden" runat="server" ClientIDMode="Static" />
         <input id="Hidden2" type="hidden" runat="server" ClientIDMode="Static" />
