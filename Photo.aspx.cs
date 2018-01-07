@@ -11,8 +11,11 @@ using System.Web.Security;
 
 public partial class Photo : System.Web.UI.Page
 {
-    string photoName;
-    protected bool seeEditButtons = false;
+    string PhotoName;
+    protected string AlbumId;
+    protected string AlbumName;
+    protected string UserName;
+    protected bool SeeEditButtons = false;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -69,18 +72,21 @@ public partial class Photo : System.Web.UI.Page
             while (reader.Read())
             {
                 Image.ImageUrl = "Images/" + reader["PhotoName"].ToString();
-                this.photoName = reader["PhotoName"].ToString();
+                this.UserName = reader["UserName"].ToString();
+                this.AlbumId = reader["AlbumId"].ToString();
+                this.AlbumName = reader["AlbumName"].ToString();
+                this.PhotoName = reader["PhotoName"].ToString();
                 Category.Text = reader["Category"].ToString();
                 Description.Text = reader["Description"].ToString();
                 UploadDate.Text = reader["UploadDate"].ToString();
                 
-                this.seeEditButtons = false;
+                this.SeeEditButtons = false;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
                     if (Profile.UserName == reader["UserName"].ToString())
-                        this.seeEditButtons = true;
+                        this.SeeEditButtons = true;
                     if (Roles.GetRolesForUser().Contains("admin"))
-                        this.seeEditButtons = true;
+                        this.SeeEditButtons = true;
                 }
                 DataBind();
             }
@@ -110,7 +116,7 @@ public partial class Photo : System.Web.UI.Page
             "DELETE FROM Photos " +
             "WHERE PhotoId = @pPhotoId";
 
-        var photoPath = Server.MapPath("~/Images/" + photoName);
+        var photoPath = Server.MapPath("~/Images/" + PhotoName);
  
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         try
