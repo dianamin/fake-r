@@ -7,10 +7,14 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.Security;
+using System.Web.Script.Serialization;
+
 
 public partial class User : System.Web.UI.Page
 {
     protected bool seeButtons;
+    protected String Locations;
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -30,14 +34,15 @@ public partial class User : System.Web.UI.Page
             if (Profile.UserName == userName)
                 this.seeButtons = true;
         }
-        DataBind();
 
         this.UserName.Text = userName;
         this.fetchProfie(userName);
         this.fetchAlbums(userName);
+        this.fetchLocations(userName);
 
         string role = (Roles.GetRolesForUser(userName).Contains("member")) ? "member" : "admin";
         if (UserRole != null) UserRole.Text = role;
+        Page.DataBind();
     }
 
     private void fetchProfie(string userName)
@@ -57,7 +62,35 @@ public partial class User : System.Web.UI.Page
             "GROUP BY a.AlbumId,a.Name,a.Description"; 
         AlbumsSource.SelectParameters.Clear();
         AlbumsSource.SelectParameters.Add("pUserName", userName);
-        Page.DataBind();
+    }
+
+
+    private void fetchLocations(String userName)
+    {
+        this.Locations = "[]";
+        string locationsQuery =
+            "SELECT Latitude, Longitude " +
+            "FROM Photos p JOIN Albums a ON (p.AlbumId = a.AlbumId) " +
+            "WHERE a.UserName = @pUserName";
+        string locations = "";
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        cn.Open();
+        try
+        {
+            SqlCommand cmd = new SqlCommand(locationsQuery, cn);
+            cmd.Parameters.AddWithValue("pUserName", userName);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                locations += "{Longitude: " + reader["Longitude"].ToString() + ", Latitude: " + reader["Latitude"].ToString() + "}, ";
+            }
+            cn.Close();
+            this.Locations = "[" + locations + "]";
+        }
+        catch (Exception exCMD)
+        {
+            Console.WriteLine(exCMD.Message);
+        }
     }
 
     protected void ChangeRole_Click(object sender, EventArgs e)

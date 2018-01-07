@@ -46,7 +46,8 @@
                 </div>
             </div>
         </div>
-
+        <div id="googleMap" style="width:100%; height:200px;"></div>
+        <br />
         <h2>
             <i class="material-icons md-18">book</i>
              Albums
@@ -74,3 +75,22 @@
     </div>
 </asp:Content>
 
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
+    <script>
+        function myMap() {
+            let mapProp = {
+                zoom:2,
+                center: new google.maps.LatLng(44, 26)
+            };
+            let locations = <%# Locations %>
+            console.log(locations);
+
+            let map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            locations.forEach((location) => {
+                let marker = new google.maps.Marker({position: new google.maps.LatLng(location.Latitude, location.Longitude)});
+                marker.setMap(map);
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByCtycj8MOJ7pOQ7LtQYQ1eMKtSSJk9GA&callback=myMap"></script>
+</asp:Content>
