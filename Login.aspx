@@ -5,7 +5,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:Login ID="Login1" runat="server" style="width: 100%">
         <LayoutTemplate>
-            <h2> Log In </h2>
+            <h2>
+                <i class="material-icons md-18">exit_to_app</i>
+                Login
+            </h2>
             <div class="form-group">
                 <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Username:</asp:Label>
                 <asp:TextBox ID="UserName" runat="server" class="form-control"></asp:TextBox>

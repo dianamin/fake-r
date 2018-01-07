@@ -10,7 +10,10 @@
         <WizardSteps>
             <asp:CreateUserWizardStep ID="CreateUserWizardStep1" runat="server">
                 <ContentTemplate>
-                    <h2> Register </h2>
+                    <h2>
+                        <i class="material-icons md-18">person</i>
+                        Register
+                    </h2>
                     <div class="form-group">
                         <asp:Label ID="Label4" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
                         <asp:TextBox ID="UserName" runat="server" class="form-control"></asp:TextBox>

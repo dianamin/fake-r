@@ -3,6 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h2>
+        <i class="material-icons md-18">search</i>
+        Search
+    </h2>
     <div class="input-group">
         <asp:TextBox ID="SearchBox" runat="server" class="form-control"></asp:TextBox>
         <div class="input-group-btn">

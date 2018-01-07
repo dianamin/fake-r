@@ -19,10 +19,12 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div class="container-fluid">
-        <h2> Crop Photo </h2>
-        <br />
-        <asp:Image ID="imgUpload" class="rounded" runat="server" style="max-height:70vh; max-width: 100%; margin: 2px auto;" />
+    <div>
+        <h2>
+            <i class="material-icons md-18">content_cut</i>
+            Crop Photo
+        </h2>
+        <asp:Image ID="imgUpload" class="rounded" runat="server" style="max-height:65vh; max-width: 100%; margin: 2px auto;" />
         <asp:HiddenField ID="X" runat="server" />  
         <asp:HiddenField ID="Y" runat="server" />  
         <asp:HiddenField ID="W" runat="server" />  
