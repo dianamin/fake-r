@@ -4,37 +4,38 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
-        <h2> 
+        <h2>
             <i class="material-icons md-18">person</i>
             User Profile
         </h2>
-        <br />
         <div class="jumbotron jumbotron-fluid">
             <div class="row">
-                <div class="col-md-6" style="text-align: right; padding-right: 20px; border-right: 1px solid #aaaaaa;">
-                    <h1 class="display-4" style="text-align: right">
-                        <asp:Label ID="UserName" runat="server" Text="Label"></asp:Label>
-                    </h1>
+                <div class="col-md-6 d-flex align-items-center justify-content-end" style="padding-right: 20px; border-right: 1px solid #aaaaaa;">
+                    <div>
+                        <h1 class="display-4" style="text-align: right">
+                            <asp:Label ID="UserName" runat="server" Text="Label"></asp:Label>
+                        </h1>
                 
-                    <asp:LoginView ID="AdminView" runat="server">
-                        <RoleGroups>
-                            <asp:RoleGroup Roles="Admin">
-                                <ContentTemplate>
-                                    <br />
-                                    <div class="btn-group">
-                                        <asp:Button ID="ChangeRole" runat="server" Text="Change role"
-                                                    OnClick="ChangeRole_Click" class="btn btn-danger"
-                                                    OnClientClick="return confirm('Are you sure you want to change the role of this user?')" />
-                                        <asp:Button ID="DeleteUser" runat="server" Text="Delete account"
-                                                    OnClick="DeleteUser_Click" class="btn btn-danger"
-                                                    OnClientClick="return confirm('Are you sure you want to delete this user?')" />
-                                    </div>
-                                    <br />
-                                    <asp:Label ID="UserError" runat="server"></asp:Label>
-                                </ContentTemplate>
-                            </asp:RoleGroup>
-                        </RoleGroups>
-                    </asp:LoginView>
+                        <asp:LoginView ID="AdminView" runat="server">
+                            <RoleGroups>
+                                <asp:RoleGroup Roles="Admin">
+                                    <ContentTemplate>
+                                        <br />
+                                        <div class="btn-group">
+                                            <asp:Button ID="ChangeRole" runat="server" Text="Change role"
+                                                        OnClick="ChangeRole_Click" class="btn btn-danger"
+                                                        OnClientClick="return confirm('Are you sure you want to change the role of this user?')" />
+                                            <asp:Button ID="DeleteUser" runat="server" Text="Delete account"
+                                                        OnClick="DeleteUser_Click" class="btn btn-danger"
+                                                        OnClientClick="return confirm('Are you sure you want to delete this user?')" />
+                                        </div>
+                                        <br />
+                                        <asp:Label ID="UserError" runat="server"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:RoleGroup>
+                            </RoleGroups>
+                        </asp:LoginView>
+                    </div>
                 </div>
 
                 <div class="col-md-6" style="text-align: left; padding-left: 20px">
@@ -44,21 +45,20 @@
                     <asp:Label ID="UserRole" runat="server"></asp:Label>
                 </div>
             </div>
-            <hr class="my-4" />
         </div>
 
-
-        <h2> Albums </h2>
+        <h2>
+            <i class="material-icons md-18">book</i>
+             Albums
+        </h2>
         <asp:Button ID="AddAlbum" runat="server" Text="New album" 
-            onclick="AddAlbum_Click" class="btn btn-primary" visible="<%# seeButtons %>"/>
-        <br />
-    
+            onclick="AddAlbum_Click" class="card add-album" visible="<%# seeButtons %>" />
         <asp:SqlDataSource ID="AlbumsSource" runat="server"
             ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">
         </asp:SqlDataSource>
         <asp:Repeater ID="Albums" runat="server" DataSourceID="AlbumsSource">
             <ItemTemplate>
-                <div class="card" style="width: 10rem; display: inline-block;">
+                <div class="card" style="width: 10rem; height: 160px; vertical-align: top; display: inline-block;">
                     <div class="card-body text-center">
                         <a href='Album.aspx?album=<%# Eval("AlbumId") %>'>
                             <i class="material-icons md-14"> book </i>
