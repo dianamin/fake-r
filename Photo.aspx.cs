@@ -15,6 +15,8 @@ public partial class Photo : System.Web.UI.Page
     protected string AlbumId;
     protected string AlbumName;
     protected string UserName;
+    protected double Lattitude;
+    protected double Longitude;
     protected bool SeeEditButtons = false;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -80,6 +82,9 @@ public partial class Photo : System.Web.UI.Page
                 Description.Text = reader["Description"].ToString();
                 UploadDate.Text = reader["UploadDate"].ToString();
                 
+                this.Lattitude = 51.508742;
+                this.Longitude = -0.120850;
+
                 this.SeeEditButtons = false;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {

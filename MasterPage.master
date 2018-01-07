@@ -127,9 +127,11 @@
         
         <div id="page-container" class="container-fluid">
             <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-        
             </asp:ContentPlaceHolder>
         </div>
     </form>
+    
+    <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">
+    </asp:ContentPlaceHolder>
 </body>
 </html>

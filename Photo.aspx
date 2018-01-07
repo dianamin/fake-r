@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Photo.aspx.cs" Inherits="Photo" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="container-fluid">
         <div class="row">
@@ -34,6 +32,7 @@
                 <p style="margin-left: 35px">
                     <asp:Label ID="Description" runat="server" Text="Label"></asp:Label>
                 </p>
+                <div id="googleMap" style="width:100%; height:150px;"></div>
                 <asp:Panel ID="Panel1" visible="<%# SeeEditButtons %>" runat="server">
                     <div class="btn-group">
                         <asp:Button ID="EditPhotoDetails" runat="server" Text="Edit Details" 
@@ -91,5 +90,22 @@
             </div>
         </div>
     </div>
+
 </asp:Content>
 
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
+    <script>
+        function myMap() {
+            let mapProp = {
+                center:new google.maps.LatLng(<%# Lattitude %>, <%# Longitude %>),
+                zoom:5,
+            };
+
+            let map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            let marker = new google.maps.Marker({position: mapProp.center});
+            marker.setMap(map);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByCtycj8MOJ7pOQ7LtQYQ1eMKtSSJk9GA&callback=myMap"></script>
+</asp:Content>
