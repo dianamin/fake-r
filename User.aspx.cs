@@ -15,7 +15,6 @@ public partial class User : System.Web.UI.Page
     protected bool seeButtons;
     protected String Locations;
 
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack) return;
@@ -63,7 +62,6 @@ public partial class User : System.Web.UI.Page
         AlbumsSource.SelectParameters.Clear();
         AlbumsSource.SelectParameters.Add("pUserName", userName);
     }
-
 
     private void fetchLocations(String userName)
     {
