@@ -54,13 +54,15 @@
             padding-top: 20px !important;
             padding-bottom: 20px !important;
             margin-bottom: 0px !important;
+            border-top-left-radius: 5px !important;
+            border-top-right-radius: 5px !important;
         }
         
         #googleMap
         {
             margin-bottom: 20px;
-            border-bottom-left-radius: 5px;
-            border-bottom-radius-radius: 5px;
+            border-bottom-left-radius: 5px !important;
+            border-bottom-right-radius: 5px !important;
         }
         
         #page-container
@@ -102,16 +104,28 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="Search.aspx">Search</a>
-                    <a class="nav-item nav-link" href="Categories.aspx">Categories</a>
+                    <a class="nav-item nav-link" href="Search.aspx">
+                        <i class="material-icons md-14">search</i>
+                        Search
+                    </a>
+                    <a class="nav-item nav-link" href="Categories.aspx">
+                        <i class="material-icons md-14">loyalty</i>
+                        Categories
+                    </a>
                     <asp:LoginView ID="LoginView2" runat="server">
                         <LoggedInTemplate>
                         </LoggedInTemplate>
                     </asp:LoginView>
-                    <a class="nav-item nav-link" href="Users.aspx">Users</a>
+                    <a class="nav-item nav-link" href="Users.aspx">
+                        <i class="material-icons md-14">people</i>
+                        Users
+                    </a>
                     <asp:LoginView ID="LoginView3" runat="server">
                         <LoggedInTemplate>
-                            <a class="nav-item nav-link" href="AddPhoto.aspx">Upload</a>
+                            <a class="nav-item nav-link" href="AddPhoto.aspx">
+                                <i class="material-icons md-14">photo</i>
+                                Upload
+                            </a>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
