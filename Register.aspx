@@ -6,7 +6,7 @@
     <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" 
         oncontinuebuttonclick="CreateUserWizard1_ContinueButtonClick" 
         oncreateduser="CreateUserWizard1_CreatedUser" 
-        onfinishbuttonclick="CreateUserWizard1_FinishButtonClick">
+        onfinishbuttonclick="CreateUserWizard1_FinishButtonClick" style="width: 100%;">
         <WizardSteps>
             <asp:CreateUserWizardStep ID="CreateUserWizardStep1" runat="server">
                 <ContentTemplate>
@@ -16,7 +16,7 @@
                         <asp:TextBox ID="UserName" runat="server" class="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" 
                             ControlToValidate="UserName" ErrorMessage="User Name is required." 
-                            ToolTip="User Name is required." ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
+                            ToolTip="Username is required." ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group">
                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
@@ -88,24 +88,31 @@
             </asp:WizardStep>
             <asp:CompleteWizardStep ID="CompleteWizardStep1" runat="server">
                 <ContentTemplate>
-                    <table>
-                        <tr>
-                            <td align="center"> Complete </td>
-                        </tr>
-                        <tr>
-                            <td> Your account has been successfully created. </td>
-                        </tr>
-                        <tr>
-                            <td align="right">
-                                <asp:Button ID="ContinueButton" runat="server" CausesValidation="False" 
-                                    CommandName="Continue" Text="Continue" ValidationGroup="CreateUserWizard1"
-                                    class="btn btn-primary" />
-                            </td>
-                        </tr>
-                    </table>
+                    <h2> Complete </h2>
+                    <br />
+                    <p> Your account has been successfully created. </p>
+                    <asp:Button ID="ContinueButton" runat="server" CausesValidation="False" 
+                        CommandName="Continue" Text="Continue" ValidationGroup="CreateUserWizard1"
+                        class="btn btn-primary" />
                 </ContentTemplate>
             </asp:CompleteWizardStep>
         </WizardSteps>
     </asp:CreateUserWizard>
+
+    <script>
+        // Could not edit the buttons in the register form.
+        // Solved the problem in a totally not hacky way.
+        let buttons = document.querySelectorAll('input[type="submit"]');
+  
+        buttons.forEach((button) => {
+            button.classList.add('btn');
+            button.classList.add('btn-primary');
+        });
+
+        let tds = document.querySelectorAll('td[align="right"]');
+        tds.forEach((td) => {
+            td.setAttribute('align', 'left');
+        });
+    </script>
 </asp:Content>
 
