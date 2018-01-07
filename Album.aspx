@@ -3,23 +3,38 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-     
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"> <asp:Label ID="UserName" runat="server" Text="Label"></asp:Label> </li>
-        <li class="breadcrumb-item"> <asp:Label ID="AlbumName" runat="server" Text="Label" Font-Size="Large"></asp:Label> </li>
-    </ol>
-    <asp:Label ID="Description" runat="server" Text=""></asp:Label>
-    <br />
-    <asp:Panel ID="Panel1" class="btn-group" visible="<%# seeEditButtons %>" style="float: right;" runat="server" >
-        <asp:Button ID="EditAlbum" runat="server" Text="Edit album" 
-            class="btn btn-warning" onclick="EditAlbum_Click" />
-        <asp:Button ID="DeleteAlbum" runat="server" Text="Delete album" 
-            onclick="DeleteAlbum_Click" class="btn btn-danger"
-            OnClientClick="return confirm('Are you sure you want to delete this album?')" />
-    </asp:Panel>
-    <br />
-    <br />
-    
+    <div>
+        <h2>
+            <i class="material-icons md-18">book</i>
+            Album
+        </h2>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center justify-content-end" style="padding-right: 20px; border-right: 1px solid #aaaaaa;">
+                    <div>
+                        <h1 class="display-4" style="text-align: right">
+                            <asp:Label ID="AlbumName" runat="server"></asp:Label>
+                        </h1>
+
+                        <asp:Panel ID="Panel1" class="btn-group" visible="<%# seeEditButtons %>" style="float: right;" runat="server" >
+                            <asp:Button ID="EditAlbum" runat="server" Text="Edit album" 
+                                class="btn btn-default" onclick="EditAlbum_Click" />
+                            <asp:Button ID="DeleteAlbum" runat="server" Text="Delete album" 
+                                onclick="DeleteAlbum_Click" class="btn btn-danger"
+                                OnClientClick="return confirm('Are you sure you want to delete this album?')" />
+                        </asp:Panel>
+                    </div>
+                </div>
+
+                <div class="col-md-6 d-flex align-items-center justify-content-start" style="padding-left: 20px">
+                    <blockquote class="blockquote">
+                        <asp:Label ID="Description" runat="server" Text=""></asp:Label>
+                        <footer class="blockquote-footer"> <asp:Label ID="UserName" runat="server"></asp:Label> </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
     <asp:SqlDataSource ID="PhotosSource" runat="server"
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">
     </asp:SqlDataSource>
@@ -27,7 +42,7 @@
         <ItemTemplate>
             <div class="card" style="width: 20rem; display: inline-block;">
                 <asp:Image ID="Image1" runat="server" class="card-img-top mx-auto d-block"
-                           ImageUrl='<%# "Images/" + Eval("PhotoName") %>' />
+                            ImageUrl='<%# "Images/" + Eval("PhotoName") %>' />
                 <div class="card-body">     
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"> 
@@ -47,7 +62,7 @@
                     <div>
                         <i class="material-icons md-14">date_range</i>
                         <asp:Label ID="Label2" class="card-text" runat="server" 
-                                   Text='<%# Eval("UploadDate") %>' />
+                                    Text='<%# Eval("UploadDate") %>' />
                     </div>
                     <a href='Photo.aspx?photo=<%# Eval("PhotoId") %>' class="card-link">
                         <i class="material-icons md-14">remove_red_eye</i>
