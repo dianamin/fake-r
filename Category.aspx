@@ -3,10 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <h4>
-        <i class="material-icons md-14">loyalty</i>
+    <h2>
+        <i class="material-icons md-18">loyalty</i>
         <asp:Label ID="CategoryName" runat="server" Text="Label"></asp:Label>
-    </h4>
+    </h2>
     
     <asp:SqlDataSource ID="PhotosSource" runat="server"
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">

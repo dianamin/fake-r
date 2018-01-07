@@ -3,6 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h2> 
+        <i class="material-icons md-18">loyalty</i>
+        Categories
+    </h2>
+    <br />
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" 
         SelectCommand="SELECT c.CategoryId, c.Name, COUNT(p.PhotoId)  as PhotosCount
