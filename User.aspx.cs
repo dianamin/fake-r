@@ -71,7 +71,7 @@ public partial class User : System.Web.UI.Page
         string locationsQuery =
             "SELECT Latitude, Longitude " +
             "FROM Photos p JOIN Albums a ON (p.AlbumId = a.AlbumId) " +
-            "WHERE a.UserName = @pUserName";
+            "WHERE a.UserName = @pUserName AND Latitude IS NOT NULL AND Longitude IS NOT NULL";
         string locations = "";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         cn.Open();

@@ -27,10 +27,12 @@ public partial class AddPhoto : System.Web.UI.Page
         String description = Description.Text;
         int categoryId = int.Parse(Category.SelectedValue);
         int albumId = int.Parse(Album.SelectedValue);
+        String longitude = Longitude.Value;
+        String latitude = Latitude.Value;
         
         string insertPhotoQuery =
-            "INSERT INTO Photos (Name, CategoryId, Description, AlbumId) " +
-            "VALUES (@pImageName, @pCategoryId, @pDescription, @pAlbumId)";
+            "INSERT INTO Photos (Name, CategoryId, Description, AlbumId, Latitude, Longitude) " +
+            "VALUES (@pImageName, @pCategoryId, @pDescription, @pAlbumId, @pLatitude, @pLongitude)";
 
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
         try
@@ -42,6 +44,15 @@ public partial class AddPhoto : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pCategoryId", categoryId);
             cmd.Parameters.AddWithValue("pDescription", description);
             cmd.Parameters.AddWithValue("pAlbumId", albumId);
+            System.Diagnostics.Debug.WriteLine(latitude, longitude);
+            if (latitude == null)
+                cmd.Parameters.AddWithValue("pLatitude", null);
+            else
+                cmd.Parameters.AddWithValue("pLatitude", Double.Parse(latitude));
+            if (longitude == null)
+                cmd.Parameters.AddWithValue("pLongitude", null);
+            else
+                cmd.Parameters.AddWithValue("pLongitude", Double.Parse(longitude));
             cmd.ExecuteNonQuery();
             cn.Close();
             Response.Redirect("~/Default.aspx");

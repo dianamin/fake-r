@@ -82,9 +82,6 @@ public partial class Photo : System.Web.UI.Page
                 Description.Text = reader["Description"].ToString();
                 UploadDate.Text = reader["UploadDate"].ToString();
                 
-                this.Latitude = Double.Parse(reader["Latitude"].ToString());
-                this.Longitude = Double.Parse(reader["Longitude"].ToString());
-
                 this.SeeEditButtons = false;
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
@@ -93,6 +90,9 @@ public partial class Photo : System.Web.UI.Page
                     if (Roles.GetRolesForUser().Contains("admin"))
                         this.SeeEditButtons = true;
                 }
+
+                this.Latitude = Double.Parse(reader["Latitude"].ToString());
+                this.Longitude = Double.Parse(reader["Longitude"].ToString());
                 DataBind();
             }
             cn.Close();
