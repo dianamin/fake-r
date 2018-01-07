@@ -83,7 +83,6 @@
                 center: new google.maps.LatLng(44, 26)
             };
             let locations = <%# Locations %>
-            console.log(locations);
 
             let map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
             locations.forEach((location) => {
