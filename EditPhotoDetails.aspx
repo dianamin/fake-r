@@ -17,6 +17,13 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Description" ErrorMessage="Please add a description!"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
+                    <asp:Label ID="Label5" runat="server" Text="Location"></asp:Label>
+                    <asp:TextBox ID="LocationBox" runat="server" class="form-control" ClientIDMode="Static"></asp:TextBox>
+            
+                    <input id="LatitudeField" type="hidden" runat="server" ClientIDMode="Static" />
+                    <input id="LongitudeField" type="hidden" runat="server" ClientIDMode="Static" />
+                </div>
+                <div class="form-group">
                     <asp:Label ID="Label4" runat="server" Text="Category"></asp:Label>
                     <asp:DropDownList ID="Category" runat="server" class="form-control"
                         DataSourceID="CategoriesSource" DataTextField="Name" DataValueField="CategoryId">
@@ -44,5 +51,30 @@
         </div>
         <asp:Button ID="Save" runat="server" onclick="Save_Click" Text="Save" class="btn btn-primary" />
     </div>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
+    <script>
+        let input = document.getElementById('LocationBox');
+        let latitude = document.getElementById('LatitudeField');
+        let longitude = document.getElementById('LongitudeField');
+        let searchBox = null;
+        function initAutocomplete() {
+            searchBox = new google.maps.places.SearchBox(input);
+
+            
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+                if (!places || places.length == 0) {
+                    latitude.value = null;
+                    longitude.value = null;
+                    return;
+                }
+                latitude.value = places[0].geometry.location.lat();
+                longitude.value = places[0].geometry.location.lng();
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByCtycj8MOJ7pOQ7LtQYQ1eMKtSSJk9GA&libraries=places&callback=initAutocomplete"></script>
 </asp:Content>
 

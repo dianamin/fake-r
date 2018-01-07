@@ -25,6 +25,7 @@ public partial class EditPhotoDetails : System.Web.UI.Page
         String photoId = Uri.UnescapeDataString(Request.Params["photo"]);
         this.fetchUserAlbums();
         this.fetchPhoto(photoId);
+        Page.DataBind();
     }
 
     private void fetchUserAlbums()
@@ -35,13 +36,12 @@ public partial class EditPhotoDetails : System.Web.UI.Page
             "WHERE UserName=@pUserName";
         AlbumsSource.SelectParameters.Clear();
         AlbumsSource.SelectParameters.Add("pUserName", Profile.UserName);
-        Page.DataBind();
     }
 
     private void fetchPhoto(String photoId)
     {
         string photoQuery =
-            "SELECT p.Name as PhotoName, a.UserName, CategoryId, a.AlbumId, p.Description " +
+            "SELECT p.Name as PhotoName, a.UserName, CategoryId, a.AlbumId, p.Description, Latitude, Longitude " +
             "FROM Photos p JOIN Albums a ON (a.AlbumId = p.AlbumId) " +
             "WHERE PhotoId=@pPhotoId";
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
@@ -60,6 +60,9 @@ public partial class EditPhotoDetails : System.Web.UI.Page
                 Category.SelectedValue = reader["CategoryId"].ToString();
                 Album.SelectedValue = reader["AlbumId"].ToString();
                 Description.Text = reader["Description"].ToString();
+
+                LatitudeField.Value = reader["Latitude"].ToString();
+                LongitudeField.Value = reader["Longitude"].ToString();
 
                 if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
@@ -83,13 +86,15 @@ public partial class EditPhotoDetails : System.Web.UI.Page
 
     protected void Save_Click(object sender, EventArgs e)
     {
-        String description = Uri.UnescapeDataString(Description.Text);
+        String description = Description.Text;
         int categoryId = int.Parse(Category.SelectedValue);
         int albumId = int.Parse(Album.SelectedValue);
+        String longitude = LongitudeField.Value;
+        String latitude = LatitudeField.Value;
 
         string updatePhotoQuery =
             "Update Photos " +
-            "SET CategoryId = @pCategoryId, Description = @pDescription, AlbumId = @pAlbumId " +
+            "SET CategoryId = @pCategoryId, Description = @pDescription, AlbumId = @pAlbumId, Latitude = @pLatitude, Longitude = @pLongitude " +
             "WHERE PhotoId = @pPhotoId";
 
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
@@ -101,6 +106,14 @@ public partial class EditPhotoDetails : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pDescription", description);
             cmd.Parameters.AddWithValue("pAlbumId", albumId);
             cmd.Parameters.AddWithValue("pPhotoId", Uri.UnescapeDataString(Request.Params["photo"]));
+            if (latitude == null)
+                cmd.Parameters.AddWithValue("pLatitude", null);
+            else
+                cmd.Parameters.AddWithValue("pLatitude", Double.Parse(latitude));
+            if (longitude == null)
+                cmd.Parameters.AddWithValue("pLongitude", null);
+            else
+                cmd.Parameters.AddWithValue("pLongitude", Double.Parse(longitude));
             cmd.ExecuteNonQuery();
             cn.Close();
             Response.Redirect("~/Photo.aspx?photo=" + Request.Params["photo"]);

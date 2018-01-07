@@ -69,7 +69,6 @@
                 longitude.value = places[0].geometry.location.lng();
             });
         }
-
     </script>
 </asp:Content>
 

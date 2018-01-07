@@ -44,7 +44,6 @@ public partial class AddPhoto : System.Web.UI.Page
             cmd.Parameters.AddWithValue("pCategoryId", categoryId);
             cmd.Parameters.AddWithValue("pDescription", description);
             cmd.Parameters.AddWithValue("pAlbumId", albumId);
-            System.Diagnostics.Debug.WriteLine(latitude, longitude);
             if (latitude == null)
                 cmd.Parameters.AddWithValue("pLatitude", null);
             else
