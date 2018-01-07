@@ -3,8 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:TextBox ID="SearchBox" runat="server" class="form-control"></asp:TextBox>
-    <asp:Button ID="SearchButton" runat="server" class="btn btn-primary" Text="Search" onclick="Search_Click" />
+    <div class="input-group">
+        <asp:TextBox ID="SearchBox" runat="server" class="form-control"></asp:TextBox>
+        <div class="input-group-btn">
+            <asp:Button ID="SearchButton" runat="server" class="btn btn-default" Text="Search" onclick="Search_Click" />
+        </div>
+    </div>
     <br />
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">
