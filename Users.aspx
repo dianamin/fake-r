@@ -3,6 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h2> 
+        <i class="material-icons md-18">person</i>
+        Users
+    </h2>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" 
         SelectCommand= "SELECT photosCount.UserName as UserName, PhotosCount, AlbumsCount
@@ -16,18 +20,22 @@
                         FROM aspnet_Users u
                         LEFT JOIN Albums a ON (u.UserName = a.UserName)
                         GROUP BY u.UserName
-                        ) albumsCount ON (photosCount.UserName = albumsCount.UserName);">
+                        ) albumsCount ON (photosCount.UserName = albumsCount.UserName)
+                        ORDER BY PhotosCount DESC;">
     </asp:SqlDataSource>
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
         <ItemTemplate>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <a href='User.aspx?username=<%# Eval("UserName") %>'>
-                    <%# Eval("UserName") %>
-                </a>
-                <span class="badge badge-primary badge-pill"> <%# Eval("PhotosCount") %> Photos </span>
-                <span class="badge badge-primary badge-pill"> <%# Eval("AlbumsCount") %> Albums </span>
+            <div class="card align-items-center" style="width: 200px; display: inline-block;">
+                <div class="card-body" style="text-align: center;">
+                    <a href='User.aspx?username=<%# Eval("UserName") %>'>
+                        <%# Eval("UserName") %>
+                    </a>
+                    <br />
+                    <span class="badge badge-primary badge-pill"> <%# Eval("PhotosCount") %> Photos </span>
+                    <br />
+                    <span class="badge badge-primary badge-pill"> <%# Eval("AlbumsCount") %> Albums </span>
+                </div>
             </div>
-            <br />
         </ItemTemplate>
     </asp:ListView>
 </asp:Content>

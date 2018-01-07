@@ -37,7 +37,6 @@ public partial class User : System.Web.UI.Page
         this.fetchAlbums(userName);
 
         string role = (Roles.GetRolesForUser(userName).Contains("member")) ? "member" : "admin";
-        Label UserRole = (Label) AdminView.FindControl("UserRole");
         if (UserRole != null) UserRole.Text = role;
     }
 
