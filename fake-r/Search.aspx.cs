@@ -13,6 +13,7 @@ public partial class Search : System.Web.UI.Page
     {
         if (Page.IsPostBack) return;
 
+
         this.Latitude = 0;
         this.Longitude = 0;
         DataBind();

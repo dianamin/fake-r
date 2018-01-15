@@ -11,6 +11,13 @@
         <div class="form-group">
             <asp:Label ID="Label2" runat="server" Text="Image"></asp:Label>
             <asp:FileUpload ID="Image" runat="server" class="form-control"/>
+            <asp:RegularExpressionValidator
+                id="RegularExpressionValidator1"
+                runat="server"
+                ErrorMessage="Only jpg/png/bmp file is allowed!"
+                ValidationExpression ="^.+(.jpg|.JPG|.png|.PNG|.bmp|.BMP)$"
+                ControlToValidate="Image"
+                > </asp:RegularExpressionValidator>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Image" ErrorMessage="Please upload your photo!"></asp:RequiredFieldValidator>
         </div>
         <div class="form-group">

@@ -11,6 +11,12 @@
 
     <!-- Bootstrap CSS -->
     <style>
+        .breadcrumb 
+        {
+            height: 48px;
+            overflow: hidden;
+        }
+        
         .add-album 
         {
             width: 10rem;
@@ -25,6 +31,8 @@
         .card 
         {
             margin-bottom: 5px;
+            overflow: hidden;
+            vertical-align: top;
         }
 
         .card-img-top 

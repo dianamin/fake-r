@@ -32,7 +32,7 @@
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>">
     </asp:SqlDataSource>
     <asp:ListView ID="Results" runat="server" DataSourceID="SqlDataSource1">
-        <ItemTemplate>
+            <ItemTemplate>
             <div class="card" style="width: 20rem; display: inline-block;">
                 <asp:Image ID="Image1" runat="server" class="card-img-top mx-auto d-block" 
                            ImageUrl='<%# "Images/" + Eval("PhotoName") %>' ImageAlign="Middle" />
@@ -69,7 +69,7 @@
                     </a>
                 </div>
             </div>
-        </ItemTemplate>
+            </ItemTemplate>
     </asp:ListView>
 </asp:Content>
 

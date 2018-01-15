@@ -125,6 +125,11 @@ public partial class User : System.Web.UI.Page
         Response.Redirect("~/Users.aspx");
     }
 
+    protected void EditProfile_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/EditProfile.aspx?username=" + Request.Params["username"]);
+    }
+
     protected void AddAlbum_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/AddAlbum.aspx");

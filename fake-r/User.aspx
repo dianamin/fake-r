@@ -22,6 +22,8 @@
                                     <ContentTemplate>
                                         <br />
                                         <div class="btn-group">
+                                            <asp:Button ID="EditProfile" runat="server" Text="Edit profile"
+                                                        OnClick="EditProfile_Click" class="btn btn-primary" />
                                             <asp:Button ID="ChangeRole" runat="server" Text="Change role"
                                                         OnClick="ChangeRole_Click" class="btn btn-danger"
                                                         OnClientClick="return confirm('Are you sure you want to change the role of this user?')" />
